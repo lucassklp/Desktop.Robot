@@ -9,10 +9,8 @@ namespace System.Robot
         Image CreateScreenCapture(Rectangle screenRect);
         Color GetPixelColor(int x, int y);
         void KeyPress(char keycode);
-        void Click();
-        void RightClick();
-        
+        void Click(IClick click);
         void Delay(int ms);
-        public void MouseMove(uint x, uint y);
+        void MouseMove(uint x, uint y);
     }
 }

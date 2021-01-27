@@ -1,6 +1,5 @@
-﻿using System;
-using System.Robot;
-using System.Threading;
+﻿using System.Robot;
+using System.Robot.Clicks;
 
 namespace Example
 {
@@ -8,11 +7,11 @@ namespace Example
     {
         static void Main(string[] args)
         {
-            var robot = Robot.Create();
-            robot.MouseMove(100, 100);
+            var robot = new Robot();
             robot.AutoDelay = 1000;
+            robot.MouseMove(100, 100);
             robot.MouseMove(700, 500);
-            robot.RightClick();
+            robot.Click(Mouse.RightButton());
         }
     }
 }

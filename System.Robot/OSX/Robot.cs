@@ -5,26 +5,21 @@ using System.Robot.Clicks;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace System.Robot
+namespace System.Robot.OSX
 {
-    public class OSXRobot : IRobot
+    public class Robot : IRobot
     {
-        private uint x;
-        private uint y;
-        public OSXRobot()
+        private Point position;
+        public Robot()
         {
+            position = new Point();
         }
 
-        public uint AutoDelay { get; set; }
+        public uint AutoDelay { get; set; } = 0;
 
-        public void Click()
+        public void Click(IClick click)
         {
-            leftClick(x, y);
-        }
-
-        public void RightClick()
-        {
-            rightClick(x, y);
+            click.ExecuteClick(new MouseContext(this.position));
         }
 
         public Image CreateScreenCapture(Rectangle screenRect)
@@ -36,6 +31,7 @@ namespace System.Robot
             }
             return bitmap;
         }
+
         public void Delay(int ms)
         {
             Thread.Sleep(ms);
@@ -53,18 +49,22 @@ namespace System.Robot
 
         public void MouseMove(uint x, uint y)
         {
-            this.x = x;
-            this.y = y;
+            this.position.X = (int)x;
+            this.position.Y = (int)y;
+            Delay();
             setMousePosition(x, y);
+        }
+
+        private void Delay()
+        {
+            if(AutoDelay > 0)
+            {
+                Thread.Sleep((int)AutoDelay);
+            }
         }
 
         [DllImport("./macos.os", EntryPoint="setMousePosition")]
         private static extern void setMousePosition(uint x, uint y);
 
-        [DllImport("./macos.os", EntryPoint="rightClick")]
-        private static extern void rightClick(uint x, uint y);
-
-        [DllImport("./macos.os", EntryPoint="leftClick")]
-        private static extern void leftClick(uint x, uint y);
     }
 }
