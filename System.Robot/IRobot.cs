@@ -5,12 +5,14 @@ namespace System.Robot
 {
     public interface IRobot
     {
-        int AutoDelay { get; set; }
+        uint AutoDelay { get; set; }
         Image CreateScreenCapture(Rectangle screenRect);
         Color GetPixelColor(int x, int y);
         void KeyPress(char keycode);
-        void Click(IClick click);
+        void Click();
+        void RightClick();
+        
         void Delay(int ms);
-        public void MouseMove(int x, int y);
+        public void MouseMove(uint x, uint y);
     }
 }
