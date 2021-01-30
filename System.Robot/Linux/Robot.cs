@@ -6,10 +6,6 @@ namespace System.Robot.Linux
 {
     public class Robot : IRobot
     {
-        public Robot()
-        {
-        }
-
         public uint AutoDelay { get; set; }
 
         public void Click(IClick click)

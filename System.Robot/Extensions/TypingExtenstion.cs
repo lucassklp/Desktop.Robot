@@ -5,7 +5,9 @@
         public static void Type(this IRobot robot, string text)
         {
             foreach (var ch in text)
+            {
                 robot.KeyPress(ch);
+            }
         }
 
         public static void Type(this IRobot robot, string text, uint delay)

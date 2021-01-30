@@ -3,8 +3,8 @@
 </p>
 <p align="center">
     <img alt="nuget" src="https://img.shields.io/nuget/dt/System.Robot.svg">
-    <a href="https://www.codacy.com/manual/lucassklp/System.Robot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lucassklp/System.Robot&amp;utm_campaign=Badge_Grade">
-        <img src="https://api.codacy.com/project/badge/Grade/90ffddf0fe1c4bb89e8e7049784ea190"/>
+<a href="https://www.codacy.com/gh/lucassklp/System.Robot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lucassklp/System.Robot&amp;utm_campaign=Badge_Grade">
+        <img src="https://app.codacy.com/project/badge/Grade/985f1cdd1034486cbb00a3fd3e4fff19"/>
     </a>
     <img alt="nuget version" src="https://img.shields.io/nuget/v/System.Robot.svg">
 </p>

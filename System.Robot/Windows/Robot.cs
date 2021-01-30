@@ -6,10 +6,6 @@ namespace System.Robot.Windows
 {
     public class Robot : IRobot
     {
-        public Robot()
-        {
-        }
-
         public uint AutoDelay { get; set; }
 
         public void Click(IClick click)

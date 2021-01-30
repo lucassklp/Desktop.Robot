@@ -26,12 +26,7 @@ namespace System.Robot.OSX
 
         public Image CreateScreenCapture(Rectangle screenRect)
         {
-            using var bitmap = new Bitmap(screenRect.Width, screenRect.Height);
-            using (var g = Graphics.FromImage(bitmap))
-            {
-                g.CopyFromScreen(0, 0, 0, 0, bitmap.Size, CopyPixelOperation.SourceCopy);
-            }
-            return bitmap;
+            throw new NotImplementedException();
         }
 
         public void Delay(int ms)
