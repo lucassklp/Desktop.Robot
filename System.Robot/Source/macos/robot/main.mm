@@ -73,9 +73,19 @@ extern "C" {
 
         NSString * ret;
         for (thescreen in theScreens) {
-            NSLog(@"%@x%@",  [NSNumber numberWithFloat:[thescreen frame].size.width],   [NSNumber numberWithFloat:[thescreen frame].size.height]);
             ret = [NSString stringWithFormat:@"%@x%@", [NSNumber numberWithFloat:[thescreen frame].size.width], [NSNumber numberWithFloat:[thescreen frame].size.height]];
         }
         return (char*)[ret UTF8String];
     }
+
+    void type(char ch){
+        CGEventRef downEvt = CGEventCreateKeyboardEvent( NULL, 0, true );
+        CGEventRef upEvt = CGEventCreateKeyboardEvent( NULL, 0, false );
+        UniChar oneChar = ch;
+        CGEventKeyboardSetUnicodeString( downEvt, 1, &oneChar );
+        CGEventKeyboardSetUnicodeString( upEvt, 1, &oneChar );
+        CGEventPost( kCGAnnotatedSessionEventTap, downEvt );
+        CGEventPost( kCGAnnotatedSessionEventTap, upEvt );
+    }
+
 }

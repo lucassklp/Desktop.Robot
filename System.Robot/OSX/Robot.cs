@@ -46,7 +46,8 @@ namespace System.Robot.OSX
 
         public void KeyPress(char keycode)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            type(keycode);
         }
 
         public void MouseMove(uint x, uint y)
@@ -67,12 +68,17 @@ namespace System.Robot.OSX
 
         public Point GetMousePosition()
         {
-            var pos = getMousePosition();
-            var str = Marshal.PtrToStringAnsi(pos);
-            var coords = str.Split(";")
+            var pos = Marshal.PtrToStringAnsi(getMousePosition());
+            var coords = pos.Split(";")
                 .Select(x => Convert.ToInt32(x))
                 .ToArray();
-            return new Point(coords[0], coords[1]);
+
+            var res = Marshal.PtrToStringAnsi(screenResolution());
+            var screenRes = res.Split("x")
+                .Select(x => Convert.ToInt32(x))
+                .ToArray();
+
+            return new Point(coords[0], screenRes[1] - coords[1]);
         }
 
         [DllImport("./macos.os", EntryPoint = "setMousePosition")]
@@ -81,6 +87,11 @@ namespace System.Robot.OSX
         [DllImport("./macos.os", EntryPoint = "getMousePosition")]
         private static extern IntPtr getMousePosition();
 
+        [DllImport("./macos.os", EntryPoint = "screenResolution")]
+        private static extern IntPtr screenResolution();
+
+        [DllImport("./macos.os", EntryPoint = "type")]
+        private static extern void type(char ch);
 
     }
 }

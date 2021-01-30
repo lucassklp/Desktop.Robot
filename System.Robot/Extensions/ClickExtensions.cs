@@ -1,7 +1,6 @@
-﻿using System;
-using System.Robot.Clicks;
+﻿using System.Robot.Clicks;
 
-namespace System.Robot.Extenstions
+namespace System.Robot.Extensions
 {
     public static class ClickExtensions
     {

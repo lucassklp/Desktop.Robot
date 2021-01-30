@@ -1,6 +1,5 @@
 ﻿using System.Robot;
-using System.Robot.Clicks;
-
+using System.Robot.Extensions;
 namespace Example
 {
     class Program
@@ -11,11 +10,8 @@ namespace Example
             robot.AutoDelay = 1000;
             robot.MouseMove(100, 100);
             robot.MouseMove(700, 500);
-            //robot.Click(Mouse.RightButton());
-            while (true)
-            {
-                System.Console.WriteLine(robot.GetMousePosition());
-            }
+            robot.Click();
+            robot.Type("A cat is using my PC", 250);
         }
     }
 }

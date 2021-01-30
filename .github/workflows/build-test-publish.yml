@@ -1,0 +1,47 @@
+name: Build, Test and Publish
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.100
+        source-url: https://nuget.pkg.github.com/lucassklp/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+
+    - name: Build
+      run: |
+        cd System.Robot
+        dotnet build --configuration Release --no-restore
+
+    - name: Pack
+      run: |  
+          cd System.Robot
+          dotnet pack -c Release -o out  
+
+    - name: Push System.Robot to GitHub registry
+      run: |
+        dotnet nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/lucassklp/index.json -Username lucassklp -Password ${{ secrets.GITHUB_TOKEN }}
+        dotnet nuget push ./System.Robot/out/*.nupkg --skip-duplicate
+
+    - name: Publish System.Robot to nuget.org
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+          PROJECT_FILE_PATH: System.Robot/System.Robot.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
