@@ -5,10 +5,6 @@ namespace System.Robot.Clicks.OSX
 {
     internal class LeftClick : IClick
     {
-        public LeftClick()
-        {
-        }
-
         public void ExecuteClick(MouseContext context)
         {
             leftClick((uint)context.Position.X, (uint)context.Position.Y);

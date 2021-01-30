@@ -14,9 +14,9 @@
 This library helps you to automate tasks by simulating inputs (mouse and keyboards) programmatically.
 
 ## Advantages
-- Multiplatform: works on Windows, Linux and OSX
-- Built using the Operating System Native API, no other dependency needed
-- Easy to use
+    - Multiplatform: works on Windows, Linux and OSX
+    - Built using the Operating System Native API, no other dependency needed
+    - Easy to use
 
 ## Example of use
 

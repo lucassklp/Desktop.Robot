@@ -16,7 +16,7 @@ namespace System.Robot.OSX
             position = new Point();
         }
 
-        public uint AutoDelay { get; set; } = 0;
+        public uint AutoDelay { get; set; }
 
         public void Click(IClick click)
         {

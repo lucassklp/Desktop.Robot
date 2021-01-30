@@ -6,7 +6,7 @@ namespace System.Robot
 {
     public class Robot : IRobot
     {
-        private IRobot robot;
+        private readonly IRobot robot;
 
         public Robot()
         {

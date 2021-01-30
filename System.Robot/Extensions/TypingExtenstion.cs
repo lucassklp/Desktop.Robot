@@ -13,8 +13,9 @@
             var currentDelay = robot.AutoDelay;
             robot.AutoDelay = delay;
             foreach (var ch in text)
+            {
                 robot.KeyPress(ch);
-
+            }
             robot.AutoDelay = currentDelay;
         }
     }
