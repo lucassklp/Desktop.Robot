@@ -11,6 +11,8 @@
 
 # System.Robot
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bbf1b61a677643019f2c6ec2610e62cf)](https://app.codacy.com/gh/lucassklp/System.Robot?utm_source=github.com&utm_medium=referral&utm_content=lucassklp/System.Robot&utm_campaign=Badge_Grade)
+
 This library helps you to automate tasks by simulating inputs (mouse and keyboards) programmatically.
 
 ## Advantages
