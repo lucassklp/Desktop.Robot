@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Drawing;
-using System.Robot.Clicks;
+using Desktop.Robot.Clicks;
 
-namespace System.Robot.Linux
+namespace Desktop.Robot.Linux
 {
     public class Robot : IRobot
     {

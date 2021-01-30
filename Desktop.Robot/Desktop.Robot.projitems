@@ -6,7 +6,7 @@
     <SharedGUID>{2380573C-0BBB-4013-B3D1-196CFCA1271F}</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>System.Robot</Import_RootNamespace>
+    <Import_RootNamespace>Desktop.Robot</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Robot.cs" />

@@ -5,15 +5,15 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Lucas Simas</Authors>
     <Description>A library used to control your mouse and keyboard programmatically in .NET Core</Description>
-    <PackageProjectUrl>https://lucassklp.github.io/System.Robot/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/lucassklp/System.Robot</RepositoryUrl>
-    <PackageIcon>logo.png</PackageIcon>
+    <PackageProjectUrl>https://lucassklp.github.io/Desktop.Robot/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lucassklp/Desktop.Robot</RepositoryUrl>
+    <PackageIcon>logo.mini.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\LICENSE" Pack="true" PackagePath="\" />
-    <None Include="..\Resources\logo.png" Pack="true" PackagePath="\" />
+    <None Include="..\Resources\logo.mini.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>

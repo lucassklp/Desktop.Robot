@@ -1,5 +1,5 @@
 ﻿using System;
-namespace System.Robot.Clicks
+namespace Desktop.Robot.Clicks
 {
     public interface IClick
     {

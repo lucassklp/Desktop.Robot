@@ -2,11 +2,11 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Robot.Clicks;
+using Desktop.Robot.Clicks;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace System.Robot.OSX
+namespace Desktop.Robot.OSX
 {
     public class Robot : IRobot
     {

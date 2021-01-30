@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace System.Robot.Clicks.OSX
+namespace Desktop.Robot.Clicks.OSX
 {
     internal class LeftClick : IClick
     {

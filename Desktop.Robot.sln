@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Robot", "System.Robot\System.Robot.csproj", "{32409CB0-89E1-4054-856A-DA48BD9EDF98}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop.Robot", "Desktop.Robot\Desktop.Robot.csproj", "{32409CB0-89E1-4054-856A-DA48BD9EDF98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{9B7B0021-B931-4488-84E7-D4DD4C74A555}"
 EndProject

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace System.Robot.Clicks
+namespace Desktop.Robot.Clicks
 {
     public class MouseContext
     {

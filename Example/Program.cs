@@ -1,5 +1,5 @@
-﻿using System.Robot;
-using System.Robot.Extensions;
+﻿using Desktop.Robot;
+using Desktop.Robot.Extensions;
 namespace Example
 {
     public static class Program

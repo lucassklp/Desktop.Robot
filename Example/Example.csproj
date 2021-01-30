@@ -6,6 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\System.Robot\System.Robot.csproj" />
+    <ProjectReference Include="..\Desktop.Robot\Desktop.Robot.csproj" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
-using System.Robot.Clicks;
+using Desktop.Robot.Clicks;
 
-namespace System.Robot
+namespace Desktop.Robot
 {
     public interface IRobot
     {

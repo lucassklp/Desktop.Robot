@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace System.Robot.Clicks
+namespace Desktop.Robot.Clicks
 {
     public static class Mouse
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-namespace System.Robot.Clicks.Windows
+namespace Desktop.Robot.Clicks.Windows
 {
-    internal class LeftClick : IClick
+    internal class RightClick : IClick
     {
         public void ExecuteClick(MouseContext context)
         {
