@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Robot.Clicks;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -19,6 +20,7 @@ namespace System.Robot.OSX
 
         public void Click(IClick click)
         {
+            ApplyAutoDelay();
             click.ExecuteClick(new MouseContext(this.position));
         }
 
@@ -51,11 +53,11 @@ namespace System.Robot.OSX
         {
             this.position.X = (int)x;
             this.position.Y = (int)y;
-            Delay();
+            ApplyAutoDelay();
             setMousePosition(x, y);
         }
 
-        private void Delay()
+        private void ApplyAutoDelay()
         {
             if(AutoDelay > 0)
             {
@@ -63,8 +65,22 @@ namespace System.Robot.OSX
             }
         }
 
-        [DllImport("./macos.os", EntryPoint="setMousePosition")]
+        public Point GetMousePosition()
+        {
+            var pos = getMousePosition();
+            var str = Marshal.PtrToStringAnsi(pos);
+            var coords = str.Split(";")
+                .Select(x => Convert.ToInt32(x))
+                .ToArray();
+            return new Point(coords[0], coords[1]);
+        }
+
+        [DllImport("./macos.os", EntryPoint = "setMousePosition")]
         private static extern void setMousePosition(uint x, uint y);
+
+        [DllImport("./macos.os", EntryPoint = "getMousePosition")]
+        private static extern IntPtr getMousePosition();
+
 
     }
 }

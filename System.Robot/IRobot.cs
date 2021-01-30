@@ -12,5 +12,6 @@ namespace System.Robot
         void Click(IClick click);
         void Delay(int ms);
         void MouseMove(uint x, uint y);
+        Point GetMousePosition();
     }
 }

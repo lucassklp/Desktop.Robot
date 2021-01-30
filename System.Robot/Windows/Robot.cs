@@ -27,6 +27,11 @@ namespace System.Robot.Windows
             throw new NotImplementedException();
         }
 
+        public Point GetMousePosition()
+        {
+            throw new NotImplementedException();
+        }
+
         public Color GetPixelColor(int x, int y)
         {
             throw new NotImplementedException();

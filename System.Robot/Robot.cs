@@ -45,6 +45,11 @@ namespace System.Robot
             robot.Delay(ms);
         }
 
+        public Point GetMousePosition()
+        {
+            return robot.GetMousePosition();
+        }
+
         public Color GetPixelColor(int x, int y)
         {
             return robot.GetPixelColor(x, y);

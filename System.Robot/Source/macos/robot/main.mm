@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 #include <ApplicationServices/ApplicationServices.h>
 #include <unistd.h>
 
@@ -7,47 +8,74 @@ extern "C" {
         CGPoint point;
         point.x = x;
         point.y = y;
-        //CGSetLocalEventsSuppressionInterval(0);
         CGWarpMouseCursorPosition(point);
     }
 
-    void leftClick(unsigned int x, unsigned int y){
-        CGEventRef click1_down = CGEventCreateMouseEvent(
+    void leftMouseDown(unsigned int x, unsigned int y){
+        CGEventRef mouseDown = CGEventCreateMouseEvent(
             NULL, kCGEventLeftMouseDown,
             CGPointMake(x, y),
             kCGMouseButtonLeft
         );
-        // Left button up at 250x250
-        CGEventRef click1_up = CGEventCreateMouseEvent(
+        CGEventPost(kCGHIDEventTap, mouseDown);
+        CFRelease(mouseDown);
+    }
+
+    void leftMouseUp(unsigned int x, unsigned int y){
+        CGEventRef mouseUp = CGEventCreateMouseEvent(
             NULL, kCGEventLeftMouseUp,
             CGPointMake(x, y),
             kCGMouseButtonLeft
         );
-        CGEventPost(kCGHIDEventTap, click1_down);
-        CGEventPost(kCGHIDEventTap, click1_up);
-
-        // Release the events
-        CFRelease(click1_up);
-        CFRelease(click1_down);
+        CGEventPost(kCGHIDEventTap, mouseUp);
+        CFRelease(mouseUp);
     }
 
-    void rightClick(unsigned int x, unsigned int y){
-        CGEventRef click1_down = CGEventCreateMouseEvent(
+    void rightMouseDown(unsigned int x, unsigned int y){
+        CGEventRef mouseDown = CGEventCreateMouseEvent(
             NULL, kCGEventRightMouseDown,
             CGPointMake(x, y),
             kCGMouseButtonRight
         );
-        // Left button up at 250x250
-        CGEventRef click1_up = CGEventCreateMouseEvent(
+        CGEventPost(kCGHIDEventTap, mouseDown);
+        CFRelease(mouseDown);
+    }
+
+    void rightMouseUp(unsigned int x, unsigned int y){
+        CGEventRef mouseUp = CGEventCreateMouseEvent(
             NULL, kCGEventRightMouseUp,
             CGPointMake(x, y),
             kCGMouseButtonRight
         );
-        CGEventPost(kCGHIDEventTap, click1_down);
-        CGEventPost(kCGHIDEventTap, click1_up);
+        CGEventPost(kCGHIDEventTap, mouseUp);
+        CFRelease(mouseUp);
+    }
 
-        // Release the events
-        CFRelease(click1_up);
-        CFRelease(click1_down);
+    void leftClick(unsigned int x, unsigned int y){
+        leftMouseDown(x, y);
+        leftMouseUp(x, y);
+    }
+
+    void rightClick(unsigned int x, unsigned int y){
+        rightMouseDown(x, y);
+        rightMouseUp(x, y);
+    }
+
+    char* getMousePosition(){
+        NSPoint mouseLoc = [NSEvent mouseLocation];
+        NSString* pos = [NSString stringWithFormat:@"%.0f;%.0f", mouseLoc.x, mouseLoc.y];
+        return (char*)[pos UTF8String];
+    }
+
+    char* screenResolution() {
+        NSScreen* thescreen;
+        id theScreens = [NSScreen screens];
+
+        NSString * ret;
+        for (thescreen in theScreens) {
+            NSLog(@"%@x%@",  [NSNumber numberWithFloat:[thescreen frame].size.width],   [NSNumber numberWithFloat:[thescreen frame].size.height]);
+            ret = [NSString stringWithFormat:@"%@x%@", [NSNumber numberWithFloat:[thescreen frame].size.width], [NSNumber numberWithFloat:[thescreen frame].size.height]];
+        }
+        return (char*)[ret UTF8String];
     }
 }

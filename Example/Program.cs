@@ -11,7 +11,11 @@ namespace Example
             robot.AutoDelay = 1000;
             robot.MouseMove(100, 100);
             robot.MouseMove(700, 500);
-            robot.Click(Mouse.RightButton());
+            //robot.Click(Mouse.RightButton());
+            while (true)
+            {
+                System.Console.WriteLine(robot.GetMousePosition());
+            }
         }
     }
 }
