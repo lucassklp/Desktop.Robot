@@ -11,12 +11,15 @@
 
 # Desktop.Robot
 
-This library helps you to automate tasks by simulating inputs (mouse and keyboards) programmatically.
+This library helps you to automate tasks by simulating inputs (mouse and keyboards) programmatically, inspired in [java.awt.Robot](https://docs.oracle.com/javase/7/docs/api/java/awt/Robot.html)
+
+I made this library because the dotnet SDK don't support to simulate the mouse and keyboard. The only way that is provided is using Windows.Forms but nevertheless it don't run on Linux neither OSX.
 
 ## Advantages
-    - Multiplatform: works on Windows, Linux and OSX
-    - Built using the Operating System Native API, no other dependency needed
-    - Easy to use
+- Multiplatform: works on Windows, Linux and OSX
+- Built using the Operating System Native API, no other dependency needed
+- Easy to use
+
 
 ## Example of use
 
