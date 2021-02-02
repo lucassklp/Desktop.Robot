@@ -10,18 +10,12 @@ namespace Desktop.Robot.OSX
 {
     public class Robot : IRobot
     {
-        private Point position;
-        public Robot()
-        {
-            position = new Point();
-        }
-
         public uint AutoDelay { get; set; }
 
         public void Click(IClick click)
         {
             ApplyAutoDelay();
-            click.ExecuteClick(new MouseContext(this.position));
+            click.ExecuteClick(new MouseContext(GetMousePosition()));
         }
 
         public Image CreateScreenCapture(Rectangle screenRect)
@@ -39,26 +33,27 @@ namespace Desktop.Robot.OSX
             throw new NotImplementedException();
         }
 
-        public void KeyPress(char keycode)
+        public void KeyPress(int keycode)
         {
             ApplyAutoDelay();
-            type(keycode);
+            sendCommand((ushort)keycode);
+        }
+        public void KeyDown(int keycode)
+        {
+            ApplyAutoDelay();
+            sendCommandDown((ushort)keycode);
+        }
+
+        public void KeyUp(int keycode)
+        {
+            ApplyAutoDelay();
+            sendCommandUp((ushort)keycode);
         }
 
         public void MouseMove(uint x, uint y)
         {
-            this.position.X = (int)x;
-            this.position.Y = (int)y;
             ApplyAutoDelay();
             setMousePosition(x, y);
-        }
-
-        private void ApplyAutoDelay()
-        {
-            if(AutoDelay > 0)
-            {
-                Thread.Sleep((int)AutoDelay);
-            }
         }
 
         public Point GetMousePosition()
@@ -76,6 +71,15 @@ namespace Desktop.Robot.OSX
             return new Point(coords[0], screenRes[1] - coords[1]);
         }
 
+
+        private void ApplyAutoDelay()
+        {
+            if(AutoDelay > 0)
+            {
+                Thread.Sleep((int)AutoDelay);
+            }
+        }
+
         [DllImport("./macos.os", EntryPoint = "setMousePosition")]
         private static extern void setMousePosition(uint x, uint y);
 
@@ -85,8 +89,23 @@ namespace Desktop.Robot.OSX
         [DllImport("./macos.os", EntryPoint = "screenResolution")]
         private static extern IntPtr screenResolution();
 
-        [DllImport("./macos.os", EntryPoint = "type")]
-        private static extern void type(char ch);
+        [DllImport("./macos.os", EntryPoint = "keyPress")]
+        private static extern void keyPress(int ch);
 
+        [DllImport("./macos.os", EntryPoint = "keyUp")]
+        private static extern void keyUp(int ch);
+
+        [DllImport("./macos.os", EntryPoint = "keyDown")]
+        private static extern void keyDown(int ch);
+
+        [DllImport("./macos.os", EntryPoint = "sendCommand")]
+        private static extern void sendCommand(ushort ch);
+
+        [DllImport("./macos.os", EntryPoint = "sendCommandUp")]
+        private static extern void sendCommandUp(ushort ch);
+
+
+        [DllImport("./macos.os", EntryPoint = "sendCommandDown")]
+        private static extern void sendCommandDown(ushort ch);
     }
 }

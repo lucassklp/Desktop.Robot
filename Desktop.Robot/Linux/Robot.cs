@@ -33,7 +33,17 @@ namespace Desktop.Robot.Linux
             throw new NotImplementedException();
         }
 
-        public void KeyPress(char keycode)
+        public void KeyDown(int keycode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void KeyPress(int keycode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void KeyUp(int keycode)
         {
             throw new NotImplementedException();
         }

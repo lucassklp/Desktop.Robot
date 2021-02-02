@@ -11,7 +11,8 @@ namespace Example
             robot.MouseMove(100, 100);
             robot.MouseMove(700, 500);
             robot.Click();
-            robot.Type("A cat is using my PC", 250);
+            //robot.Type("A cat is using my PC", 250);
+            robot.CombineKeys(Keys.Option, Keys.Tab);
         }
     }
 }

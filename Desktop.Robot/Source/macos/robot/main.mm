@@ -78,14 +78,57 @@ extern "C" {
         return (char*)[ret UTF8String];
     }
 
-    void type(char ch){
-        CGEventRef downEvt = CGEventCreateKeyboardEvent( NULL, 0, true );
-        CGEventRef upEvt = CGEventCreateKeyboardEvent( NULL, 0, false );
+    void keyDown(char ch){
+        CGEventRef downEvt = CGEventCreateKeyboardEvent(NULL, 0, true);
         UniChar oneChar = ch;
-        CGEventKeyboardSetUnicodeString( downEvt, 1, &oneChar );
-        CGEventKeyboardSetUnicodeString( upEvt, 1, &oneChar );
-        CGEventPost( kCGAnnotatedSessionEventTap, downEvt );
-        CGEventPost( kCGAnnotatedSessionEventTap, upEvt );
+        CGEventKeyboardSetUnicodeString(downEvt, 1, &oneChar);
+        CGEventPost(kCGAnnotatedSessionEventTap, downEvt);
     }
 
+    void keyUp(char ch){
+        CGEventRef upEvt = CGEventCreateKeyboardEvent(NULL, 0, false);
+        UniChar oneChar = ch;
+        CGEventKeyboardSetUnicodeString(upEvt, 1, &oneChar);
+        CGEventPost(kCGAnnotatedSessionEventTap, upEvt);
+    }
+
+    void keyPress(char ch){
+        keyDown(ch);
+        keyUp(ch);
+    }
+
+    void sendCommandDown(short input){
+        CGKeyCode inputKeyCode = input;
+        CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
+        CGEventRef saveCommandDown = CGEventCreateKeyboardEvent(source, inputKeyCode, YES);
+        CGEventSetFlags(saveCommandDown, kCGEventFlagMaskCommand);
+        CGEventPost(kCGAnnotatedSessionEventTap, saveCommandDown);
+        CFRelease(saveCommandDown);
+        CFRelease(source);
+    }
+
+    void sendCommandUp(short input){
+        CGKeyCode inputKeyCode = input;
+        CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
+        CGEventRef saveCommandUp = CGEventCreateKeyboardEvent(source, inputKeyCode, NO);
+        CGEventPost(kCGAnnotatedSessionEventTap, saveCommandUp);
+        CFRelease(saveCommandUp);
+        CFRelease(source);
+    }
+
+    void sendCommand(short input){
+        sendCommandDown(input);
+        sendCommandUp(input);
+    }
+
+    // void combineCommand(short[] inputs){
+
+        
+
+    //     CGKeyCode inputKeyCode = input;
+    //     CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
+    //     CGEventRef saveCommandUp = CGEventCreateKeyboardEvent(source, inputKeyCode, NO);
+    //     CGEventPost(kCGAnnotatedSessionEventTap, saveCommandUp);
+    //     CFRelease(saveCommandUp);
+    // }
 }

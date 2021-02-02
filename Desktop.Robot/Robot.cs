@@ -56,9 +56,19 @@ namespace Desktop.Robot
             return robot.GetPixelColor(x, y);
         }
 
-        public void KeyPress(char keycode)
+        public void KeyDown(int keycode)
+        {
+            robot.KeyDown(keycode);
+        }
+
+        public void KeyPress(int keycode)
         {
             robot.KeyPress(keycode);
+        }
+
+        public void KeyUp(int keycode)
+        {
+            robot.KeyUp(keycode);
         }
 
         public void MouseMove(uint x, uint y)
