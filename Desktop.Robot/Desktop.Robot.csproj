@@ -27,13 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Clicks\" />
     <Folder Include="OSX\" />
     <Folder Include="Linux\" />
     <Folder Include="Windows\" />
-    <Folder Include="Clicks\OSX\" />
     <Folder Include="Clicks\Linux\" />
-    <Folder Include="Clicks\Windows\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

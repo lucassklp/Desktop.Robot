@@ -1,56 +1,86 @@
 ﻿using System;
 using System.Drawing;
-using Desktop.Robot.Clicks;
+using System.Runtime.InteropServices;
 
 namespace Desktop.Robot.Windows
 {
-    public class Robot : IRobot
+    public class Robot : AbstractRobot
     {
-        public uint AutoDelay { get; set; }
 
-        public void Click(IClick click)
+        public override Image CreateScreenCapture(Rectangle screenRect)
         {
             throw new NotImplementedException();
         }
 
-        public Image CreateScreenCapture(Rectangle screenRect)
+        public override Point GetMousePosition()
+        {
+            PointInter lpPoint;
+            GetCursorPos(out lpPoint);
+            return (Point)lpPoint;
+        }
+
+        public override Color GetPixelColor(uint x, uint y)
         {
             throw new NotImplementedException();
         }
 
-        public void Delay(int ms)
+        public override void KeyDown(Key key)
         {
             throw new NotImplementedException();
         }
 
-        public Point GetMousePosition()
+        public override void KeyDown(char key)
         {
             throw new NotImplementedException();
         }
 
-        public Color GetPixelColor(int x, int y)
+
+        public override void KeyPress(Key key)
         {
             throw new NotImplementedException();
         }
 
-        public void KeyDown(int keycode)
+        public override void KeyPress(char key)
         {
             throw new NotImplementedException();
         }
 
-        public void KeyPress(int keycode)
+        public override void KeyUp(Key key)
         {
             throw new NotImplementedException();
         }
 
-        public void KeyUp(int keycode)
+        public override void KeyUp(char key)
         {
             throw new NotImplementedException();
         }
 
-        public void MouseMove(uint x, uint y)
+        public override void MouseMove(uint x, uint y)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            SetCursorPos(x, y);
         }
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SetCursorPos(uint x, uint y);
+
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct PointInter
+        {
+            public int X;
+            public int Y;
+            public static explicit operator Point(PointInter point) => new Point(point.X, point.Y);
+        }
+
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorPos(out PointInter lpPoint);
+
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+
+
     }
 }

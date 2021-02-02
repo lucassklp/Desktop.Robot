@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.InteropServices;
 
 namespace Desktop.Robot
 {
@@ -8,5 +7,6 @@ namespace Desktop.Robot
     {
         public string Platform { get; set; }
         public int Value { get; set; }
+        public string Char { get; set; }
     }
 }

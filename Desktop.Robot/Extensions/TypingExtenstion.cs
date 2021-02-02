@@ -36,7 +36,7 @@
             return robot;
         }
 
-        public static IRobot CombineKeys(this IRobot robot, params Keys[] keycodes)
+        public static IRobot CombineKeys(this IRobot robot, params Key[] keycodes)
         {
             foreach (var keycode in keycodes)
             {

@@ -7,12 +7,15 @@ namespace Desktop.Robot
     {
         uint AutoDelay { get; set; }
         Image CreateScreenCapture(Rectangle screenRect);
-        Color GetPixelColor(int x, int y);
-        void KeyPress(int keycode);
-        void KeyDown(int keycode);
-        void KeyUp(int keycode);
+        Color GetPixelColor(uint x, uint y);
+        void KeyPress(Key key);
+        void KeyPress(char key);
+        void KeyDown(Key key);
+        void KeyDown(char key);
+        void KeyUp(Key key);
+        void KeyUp(char key);
         void Click(IClick click);
-        void Delay(int ms);
+        void Delay(uint ms);
         void MouseMove(uint x, uint y);
         Point GetMousePosition();
     }

@@ -1,54 +1,56 @@
 ﻿using System;
 using System.Drawing;
-using Desktop.Robot.Clicks;
 
 namespace Desktop.Robot.Linux
 {
-    public class Robot : IRobot
+    public class Robot : AbstractRobot
     {
-        public uint AutoDelay { get; set; }
-
-        public void Click(IClick click)
+        public override Image CreateScreenCapture(Rectangle screenRect)
         {
             throw new NotImplementedException();
         }
 
-        public Image CreateScreenCapture(Rectangle screenRect)
+        public override Point GetMousePosition()
         {
             throw new NotImplementedException();
         }
 
-        public void Delay(int ms)
+        public override Color GetPixelColor(uint x, uint y)
         {
             throw new NotImplementedException();
         }
 
-        public Point GetMousePosition()
+        public override void KeyDown(Key key)
         {
             throw new NotImplementedException();
         }
 
-        public Color GetPixelColor(int x, int y)
+        public override void KeyDown(char key)
         {
             throw new NotImplementedException();
         }
 
-        public void KeyDown(int keycode)
+
+        public override void KeyPress(Key key)
         {
             throw new NotImplementedException();
         }
 
-        public void KeyPress(int keycode)
+        public override void KeyPress(char key)
         {
             throw new NotImplementedException();
         }
 
-        public void KeyUp(int keycode)
+        public override void KeyUp(Key key)
         {
             throw new NotImplementedException();
         }
 
-        public void MouseMove(uint x, uint y)
+        public override void KeyUp(char key)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MouseMove(uint x, uint y)
         {
             throw new NotImplementedException();
         }

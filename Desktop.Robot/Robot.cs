@@ -41,7 +41,7 @@ namespace Desktop.Robot
             return robot.CreateScreenCapture(screenRect);
         }
 
-        public void Delay(int ms)
+        public void Delay(uint ms)
         {
             robot.Delay(ms);
         }
@@ -51,24 +51,40 @@ namespace Desktop.Robot
             return robot.GetMousePosition();
         }
 
-        public Color GetPixelColor(int x, int y)
+        public Color GetPixelColor(uint x, uint y)
         {
             return robot.GetPixelColor(x, y);
         }
 
-        public void KeyDown(int keycode)
+        public void KeyDown(Key key)
         {
-            robot.KeyDown(keycode);
+            robot.KeyDown(key);
         }
 
-        public void KeyPress(int keycode)
+        public void KeyDown(char key)
         {
-            robot.KeyPress(keycode);
+            robot.KeyDown(key);
         }
 
-        public void KeyUp(int keycode)
+
+        public void KeyPress(Key key)
         {
-            robot.KeyUp(keycode);
+            robot.KeyPress(key);
+        }
+
+        public void KeyPress(char key)
+        {
+            robot.KeyPress(key);
+        }
+
+        public void KeyUp(Key key)
+        {
+            robot.KeyUp(key);
+        }
+
+        public void KeyUp(char key)
+        {
+            robot.KeyUp(key);
         }
 
         public void MouseMove(uint x, uint y)

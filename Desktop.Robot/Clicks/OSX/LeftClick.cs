@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Desktop.Robot.Clicks.OSX
 {
     internal class LeftClick : IClick
     {
-        public void ExecuteClick(MouseContext context)
+        private int delay;
+        public LeftClick(int delay)
         {
-            leftClick((uint)context.Position.X, (uint)context.Position.Y);
+            this.delay = delay;
         }
 
-        [DllImport("./macos.os", EntryPoint = "leftClick")]
-        private static extern void leftClick(uint x, uint y);
+        public void ExecuteClick(MouseContext context)
+        {
+            Common.LeftClickUp((uint)context.Position.X, (uint)context.Position.Y);
+            Thread.Sleep(delay);
+            Common.LeftClickDown((uint)context.Position.X, (uint)context.Position.Y);
+        }
+
     }
 }

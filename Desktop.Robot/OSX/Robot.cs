@@ -1,62 +1,62 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using Desktop.Robot.Clicks;
 using System.Runtime.InteropServices;
-using System.Threading;
 
 namespace Desktop.Robot.OSX
 {
-    public class Robot : IRobot
+    public class Robot : AbstractRobot
     {
-        public uint AutoDelay { get; set; }
 
-        public void Click(IClick click)
-        {
-            ApplyAutoDelay();
-            click.ExecuteClick(new MouseContext(GetMousePosition()));
-        }
-
-        public Image CreateScreenCapture(Rectangle screenRect)
+        public override Image CreateScreenCapture(Rectangle screenRect)
         {
             throw new NotImplementedException();
         }
 
-        public void Delay(int ms)
-        {
-            Thread.Sleep(ms);
-        }
 
-        public Color GetPixelColor(int x, int y)
+        public override Color GetPixelColor(uint x, uint y)
         {
             throw new NotImplementedException();
         }
 
-        public void KeyPress(int keycode)
+        public override void KeyDown(Key key)
         {
-            ApplyAutoDelay();
-            sendCommand((ushort)keycode);
-        }
-        public void KeyDown(int keycode)
-        {
-            ApplyAutoDelay();
-            sendCommandDown((ushort)keycode);
+            throw new NotImplementedException();
         }
 
-        public void KeyUp(int keycode)
+        public override void KeyDown(char key)
         {
-            ApplyAutoDelay();
-            sendCommandUp((ushort)keycode);
+            throw new NotImplementedException();
         }
 
-        public void MouseMove(uint x, uint y)
+
+        public override void KeyPress(Key key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void KeyPress(char key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void KeyUp(Key key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void KeyUp(char key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void MouseMove(uint x, uint y)
         {
             ApplyAutoDelay();
             setMousePosition(x, y);
         }
 
-        public Point GetMousePosition()
+        public override Point GetMousePosition()
         {
             var pos = Marshal.PtrToStringAnsi(getMousePosition());
             var coords = pos.Split(";")
@@ -71,14 +71,6 @@ namespace Desktop.Robot.OSX
             return new Point(coords[0], screenRes[1] - coords[1]);
         }
 
-
-        private void ApplyAutoDelay()
-        {
-            if(AutoDelay > 0)
-            {
-                Thread.Sleep((int)AutoDelay);
-            }
-        }
 
         [DllImport("./macos.os", EntryPoint = "setMousePosition")]
         private static extern void setMousePosition(uint x, uint y);
