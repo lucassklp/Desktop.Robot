@@ -9,9 +9,11 @@ namespace Desktop.Robot
     {
 
         //Characters
+        [Keycode(Platform = "OSX", Value = 0x00)]
         A,
         B,
         C,
+        [Keycode(Platform = "OSX", Value = 0x02)]
         D,
         E,
         F,
@@ -27,6 +29,7 @@ namespace Desktop.Robot
         P,
         Q,
         R,
+        [Keycode(Platform = "OSX", Value = 0x01)]
         S,
         T,
         U,
@@ -213,7 +216,7 @@ namespace Desktop.Robot
             {"Windows", OSPlatform.Windows},
         };
 
-        public static int ToChar(this Key key)
+        public static ushort GetKeycode(this Key key)
         {
             var enumType = typeof(Key);
             var memberInfos = enumType.GetMember(key.ToString());
@@ -224,10 +227,9 @@ namespace Desktop.Robot
                 .ToList();
             try
             {
-
                 var keycode = valueAttributes
                     .First(k => RuntimeInformation.IsOSPlatform(MapOS[k.Platform]));
-                return keycode.Value;
+                return (ushort)keycode.Value;
             }
             catch
             {

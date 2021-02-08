@@ -1,4 +1,9 @@
-﻿namespace Desktop.Robot.Extensions
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Threading;
+
+namespace Desktop.Robot.Extensions
 {
     public static class TypingExtenstion
     {
@@ -23,29 +28,21 @@
             return robot;
         }
 
-        public static IRobot CombineKeys(this IRobot robot, params char[] keycodes)
+        public static IRobot CombineKeys(this IRobot robot, params Key[] keys)
         {
-            foreach (var keycode in keycodes)
+            var stack = new Stack<Key>();
+            foreach (var key in keys)
             {
-                robot.KeyDown(keycode);
+                robot.KeyDown(key);
+                stack.Push(key);
             }
-            foreach (var keycode in keycodes)
-            {
-                robot.KeyUp(keycode);
-            }
-            return robot;
-        }
 
-        public static IRobot CombineKeys(this IRobot robot, params Key[] keycodes)
-        {
-            foreach (var keycode in keycodes)
+            while (stack.Count != 0)
             {
-                robot.KeyDown(keycode.ToChar());
+                var key = stack.Pop();
+                robot.KeyUp(key);
             }
-            foreach (var keycode in keycodes)
-            {
-                robot.KeyUp(keycode.ToChar());
-            }
+
             return robot;
         }
     }

@@ -100,7 +100,7 @@ extern "C" {
     void sendCommandDown(short input){
         CGKeyCode inputKeyCode = input;
         CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
-        CGEventRef saveCommandDown = CGEventCreateKeyboardEvent(source, inputKeyCode, YES);
+        CGEventRef saveCommandDown = CGEventCreateKeyboardEvent(source, inputKeyCode, true);
         CGEventSetFlags(saveCommandDown, kCGEventFlagMaskCommand);
         CGEventPost(kCGAnnotatedSessionEventTap, saveCommandDown);
         CFRelease(saveCommandDown);
@@ -110,7 +110,7 @@ extern "C" {
     void sendCommandUp(short input){
         CGKeyCode inputKeyCode = input;
         CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
-        CGEventRef saveCommandUp = CGEventCreateKeyboardEvent(source, inputKeyCode, NO);
+        CGEventRef saveCommandUp = CGEventCreateKeyboardEvent(source, inputKeyCode, false);
         CGEventPost(kCGAnnotatedSessionEventTap, saveCommandUp);
         CFRelease(saveCommandUp);
         CFRelease(source);
@@ -120,15 +120,4 @@ extern "C" {
         sendCommandDown(input);
         sendCommandUp(input);
     }
-
-    // void combineCommand(short[] inputs){
-
-        
-
-    //     CGKeyCode inputKeyCode = input;
-    //     CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
-    //     CGEventRef saveCommandUp = CGEventCreateKeyboardEvent(source, inputKeyCode, NO);
-    //     CGEventPost(kCGAnnotatedSessionEventTap, saveCommandUp);
-    //     CFRelease(saveCommandUp);
-    // }
 }

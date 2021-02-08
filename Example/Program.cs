@@ -7,12 +7,11 @@ namespace Example
         static void Main(string[] args)
         {
             var robot = new Robot();
-            robot.AutoDelay = 1000;
-            robot.MouseMove(100, 100);
+            robot.AutoDelay = 2000;
             robot.MouseMove(700, 500);
             robot.Click();
-            //robot.Type("A cat is using my PC", 250);
-            //robot.CombineKeys(Keys.Option, Keys.Tab);
+            robot.Type("A cat is using my PC", 250);
+            robot.CombineKeys(Key.Shift, Key.D);
         }
     }
 }

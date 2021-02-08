@@ -21,33 +21,38 @@ namespace Desktop.Robot.OSX
 
         public override void KeyDown(Key key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            sendCommandDown(key.GetKeycode());
         }
 
         public override void KeyDown(char key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            keyDown(key);
         }
-
 
         public override void KeyPress(Key key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            sendCommand(key.GetKeycode());
         }
 
         public override void KeyPress(char key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            keyPress(key);
         }
 
         public override void KeyUp(Key key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            sendCommandUp(key.GetKeycode());
         }
 
         public override void KeyUp(char key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            keyUp(key);
         }
 
         public override void MouseMove(uint x, uint y)
@@ -82,20 +87,19 @@ namespace Desktop.Robot.OSX
         private static extern IntPtr screenResolution();
 
         [DllImport("./macos.os", EntryPoint = "keyPress")]
-        private static extern void keyPress(int ch);
+        private static extern void keyPress(char ch);
 
         [DllImport("./macos.os", EntryPoint = "keyUp")]
-        private static extern void keyUp(int ch);
+        private static extern void keyUp(char ch);
 
         [DllImport("./macos.os", EntryPoint = "keyDown")]
-        private static extern void keyDown(int ch);
+        private static extern void keyDown(char ch);
 
         [DllImport("./macos.os", EntryPoint = "sendCommand")]
         private static extern void sendCommand(ushort ch);
 
         [DllImport("./macos.os", EntryPoint = "sendCommandUp")]
         private static extern void sendCommandUp(ushort ch);
-
 
         [DllImport("./macos.os", EntryPoint = "sendCommandDown")]
         private static extern void sendCommandDown(ushort ch);

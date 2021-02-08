@@ -14,9 +14,9 @@ namespace Desktop.Robot.Clicks.OSX
 
         public void ExecuteClick(MouseContext context)
         {
-            Common.LeftClickUp((uint)context.Position.X, (uint)context.Position.Y);
-            Thread.Sleep(delay);
             Common.LeftClickDown((uint)context.Position.X, (uint)context.Position.Y);
+            Thread.Sleep(delay);
+            Common.LeftClickUp((uint)context.Position.X, (uint)context.Position.Y);
         }
 
     }
