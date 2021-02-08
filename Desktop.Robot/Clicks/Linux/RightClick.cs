@@ -3,7 +3,7 @@ namespace Desktop.Robot.Clicks.Linux
 {
     internal class RightClick : IClick
     {
-        private int delay;
+        private readonly int delay;
         public RightClick(int delay)
         {
             this.delay = delay;

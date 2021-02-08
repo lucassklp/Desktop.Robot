@@ -5,7 +5,7 @@ namespace Desktop.Robot.Clicks.Windows
 {
     internal class LeftClick : IClick
     {
-        private int delay;
+        private readonly int delay;
         public LeftClick(int delay)
         {
             this.delay = delay;

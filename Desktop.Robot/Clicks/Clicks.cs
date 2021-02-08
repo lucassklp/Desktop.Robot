@@ -5,7 +5,17 @@ namespace Desktop.Robot.Clicks
 {
     public static class Mouse
     {
-        public static IClick RightButton(int delay = 150)
+        public static IClick RightButton()
+        {
+            return RightButton(150);
+        }
+
+        public static IClick LeftButton()
+        {
+            return LeftButton(150);
+        }
+
+        public static IClick RightButton(int delay)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
@@ -25,7 +35,7 @@ namespace Desktop.Robot.Clicks
             }
         }
 
-        public static IClick LeftButton(int delay = 150)
+        public static IClick LeftButton(int delay)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {

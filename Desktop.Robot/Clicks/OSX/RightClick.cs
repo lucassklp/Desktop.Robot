@@ -6,7 +6,7 @@ namespace Desktop.Robot.Clicks.OSX
 {
     internal class RightClick : IClick
     {
-        private int delay;
+        private readonly int delay;
         public RightClick(int delay)
         {
             this.delay = delay;
