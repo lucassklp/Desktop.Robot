@@ -43,4 +43,5 @@ namespace Example
 ```
 
 ## Current limitation
-As we are currently developing this tool, multiple monitors are not supported for now.
+1. As we are currently developing this tool, multiple monitors are not supported for now.
+2. The library is under development, and some methods will throw a NotImplementedException
