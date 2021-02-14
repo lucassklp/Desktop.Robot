@@ -13,11 +13,11 @@
 
 This library helps you to automate tasks by simulating inputs (mouse and keyboards) programmatically, inspired in [java.awt.Robot](https://docs.oracle.com/javase/7/docs/api/java/awt/Robot.html)
 
-I made this library because the dotnet SDK don't support to simulate the mouse and keyboard. The only way that is provided is using Windows.Forms but nevertheless it don't run on Linux neither OSX.
+I made this library because the dotnet SDK doesn't support simulation of mouse and keyboard input. The only way of input simulation in the standard framework is by using Windows.Forms which won't run on Linux or OSX.
 
 ## Advantages
 - Multiplatform: works on Windows, Linux and OSX
-- Built using the Operating System Native API, no other dependency needed
+- Built using the Operating System Native API, no other dependencies needed
 - Easy to use
 
 
@@ -42,6 +42,6 @@ namespace Example
 }
 ```
 
-## Current limitation
+## Current limitations
 1. As we are currently developing this tool, multiple monitors are not supported for now.
 2. The library is under development, and some methods will throw a NotImplementedException
