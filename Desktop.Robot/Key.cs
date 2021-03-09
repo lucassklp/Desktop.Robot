@@ -10,32 +10,84 @@ namespace Desktop.Robot
 
         //Characters
         [Keycode(Platform = "OSX", Value = 0x00)]
+        [Keycode(Platform = "Windows", Value = 0x41)]
         A,
+
+        [Keycode(Platform = "Windows", Value = 0x42)]
         B,
+
+        [Keycode(Platform = "Windows", Value = 0x43)]
         C,
+
         [Keycode(Platform = "OSX", Value = 0x02)]
+        [Keycode(Platform = "Windows", Value = 0x44)]
         D,
+
+        [Keycode(Platform = "Windows", Value = 0x45)]
         E,
+
+        [Keycode(Platform = "Windows", Value = 0x46)]
         F,
+
+        [Keycode(Platform = "Windows", Value = 0x47)]
         G,
+
+        [Keycode(Platform = "Windows", Value = 0x48)]
         H,
+
+        [Keycode(Platform = "Windows", Value = 0x49)]
         I,
+
+        [Keycode(Platform = "Windows", Value = 0x4A)]
         J,
+
+        [Keycode(Platform = "Windows", Value = 0x4B)]
         K,
+
+        [Keycode(Platform = "Windows", Value = 0x4C)]
         L,
+
+        [Keycode(Platform = "Windows", Value = 0x4D)]
         M,
+
+        [Keycode(Platform = "Windows", Value = 0x4E)]
         N,
+
+        [Keycode(Platform = "Windows", Value = 0x4F)]
         O,
+
+        [Keycode(Platform = "Windows", Value = 0x50)]
         P,
+
+        [Keycode(Platform = "Windows", Value = 0x51)]
         Q,
+
+        [Keycode(Platform = "Windows", Value = 0x52)]
         R,
+
         [Keycode(Platform = "OSX", Value = 0x01)]
+        [Keycode(Platform = "Windows", Value = 0x53)]
         S,
+
+        [Keycode(Platform = "Windows", Value = 0x54)]
         T,
+
+        [Keycode(Platform = "Windows", Value = 0x55)]
         U,
+
+        [Keycode(Platform = "Windows", Value = 0x56)]
         V,
+
+        [Keycode(Platform = "Windows", Value = 0x57)]
+        W,
+
+        [Keycode(Platform = "Windows", Value = 0x58)]
         X,
+
+        [Keycode(Platform = "Windows", Value = 0x59)]
         Y,
+
+        [Keycode(Platform = "Windows", Value = 0x5A)]
         Z,
 
         //Numbers
@@ -51,7 +103,10 @@ namespace Desktop.Robot
         Nine,
 
         //Symbols
+        [Keycode(Platform = "Windows", Value = 0xBC)]
         Comma,
+
+        [Keycode(Platform = "Windows", Value = 0x5A)]
         Colon,
         Semicolon,
         Dot,
@@ -209,13 +264,6 @@ namespace Desktop.Robot
 
     public static class KeysExtensions 
     {
-        private static Dictionary<string, OSPlatform> MapOS = new Dictionary<string, OSPlatform>
-        {
-            {"OSX", OSPlatform.OSX},
-            {"Linux", OSPlatform.Linux},
-            {"Windows", OSPlatform.Windows},
-        };
-
         public static ushort GetKeycode(this Key key)
         {
             var enumType = typeof(Key);
@@ -228,14 +276,13 @@ namespace Desktop.Robot
             try
             {
                 var keycode = valueAttributes
-                    .First(k => RuntimeInformation.IsOSPlatform(MapOS[k.Platform]));
+                    .First(k => RuntimeInformation.IsOSPlatform(OSPlatform.Create(k.Platform)));
                 return (ushort)keycode.Value;
             }
             catch
             {
                 throw new PlatformNotSupportedException();
             }
-
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Threading;
+﻿using System.Collections.Generic;
 
 namespace Desktop.Robot.Extensions
 {
