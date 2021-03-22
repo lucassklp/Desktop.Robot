@@ -26,33 +26,50 @@ namespace Desktop.Robot.Windows
 
         public override void KeyDown(Key key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            var keycode = (byte)key.GetKeycode();
+            keybd_event(keycode, (byte)key.GetScanCode(), 0, 0);
+            Console.WriteLine($"Down -> {key}");
         }
 
         public override void KeyDown(char key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            var keycode = (byte)VkKeyScan(key);
+            keybd_event(keycode, 0, 0, 0);
+            Console.WriteLine($"Down -> {key}");
         }
-
 
         public override void KeyPress(Key key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            var keycode = (byte)key.GetKeycode();
+            keybd_event(keycode, (byte)key.GetScanCode(), 0, 0);
+            keybd_event(keycode, (byte)key.GetScanCode(), 2, 0);
         }
 
         public override void KeyPress(char key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            var keycode = (byte)VkKeyScan(key);
+            keybd_event(keycode, 0, 0, 0);
+            keybd_event(keycode, 0, 2, 0);
         }
 
         public override void KeyUp(Key key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            var keycode = (byte)key.GetKeycode();
+            keybd_event(keycode, (byte)key.GetScanCode(), 2, 0);
+            Console.WriteLine($"Up -> {key}");
         }
 
         public override void KeyUp(char key)
         {
-            throw new NotImplementedException();
+            ApplyAutoDelay();
+            var keycode = (byte)VkKeyScan(key);
+            keybd_event(keycode, 0, 2, 0);
+            Console.WriteLine($"Up -> {key}");
         }
 
         public override void MouseMove(uint x, uint y)
@@ -80,6 +97,9 @@ namespace Desktop.Robot.Windows
 
         [DllImport("user32.dll", SetLastError = true)]
         static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+
+        [DllImport("user32.dll")]
+        private static extern short VkKeyScan(char ch);
 
 
     }
