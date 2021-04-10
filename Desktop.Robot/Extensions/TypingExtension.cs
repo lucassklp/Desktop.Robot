@@ -2,7 +2,7 @@
 
 namespace Desktop.Robot.Extensions
 {
-    public static class TypingExtenstion
+    public static class TypingExtension
     {
         public static IRobot Type(this IRobot robot, string text)
         {
