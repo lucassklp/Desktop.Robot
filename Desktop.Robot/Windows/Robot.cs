@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace Desktop.Robot.Windows
@@ -9,7 +11,10 @@ namespace Desktop.Robot.Windows
 
         public override Image CreateScreenCapture(Rectangle screenRect)
         {
-            throw new NotImplementedException();
+            var bmp = new Bitmap(screenRect.Width, screenRect.Height, PixelFormat.Format32bppArgb);
+            var g = Graphics.FromImage(bmp);
+            g.CopyFromScreen(screenRect.Left, screenRect.Top, 0, 0, bmp.Size, CopyPixelOperation.SourceCopy);
+            return bmp;
         }
 
         public override Point GetMousePosition()
@@ -29,7 +34,6 @@ namespace Desktop.Robot.Windows
             ApplyAutoDelay();
             var keycode = (byte)key.GetKeycode();
             keybd_event(keycode, (byte)key.GetScanCode(), 0, 0);
-            Console.WriteLine($"Down -> {key}");
         }
 
         public override void KeyDown(char key)
@@ -37,7 +41,6 @@ namespace Desktop.Robot.Windows
             ApplyAutoDelay();
             var keycode = (byte)VkKeyScan(key);
             keybd_event(keycode, 0, 0, 0);
-            Console.WriteLine($"Down -> {key}");
         }
 
         public override void KeyPress(Key key)
@@ -61,7 +64,6 @@ namespace Desktop.Robot.Windows
             ApplyAutoDelay();
             var keycode = (byte)key.GetKeycode();
             keybd_event(keycode, (byte)key.GetScanCode(), 2, 0);
-            Console.WriteLine($"Up -> {key}");
         }
 
         public override void KeyUp(char key)
@@ -69,7 +71,6 @@ namespace Desktop.Robot.Windows
             ApplyAutoDelay();
             var keycode = (byte)VkKeyScan(key);
             keybd_event(keycode, 0, 2, 0);
-            Console.WriteLine($"Up -> {key}");
         }
 
         public override void MouseMove(uint x, uint y)
