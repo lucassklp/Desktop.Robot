@@ -1,0 +1,1 @@
+cd Desktop.Robot/Source/x11 && make

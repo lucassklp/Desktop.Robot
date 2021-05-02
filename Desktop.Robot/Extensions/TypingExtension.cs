@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 
 namespace Desktop.Robot.Extensions
 {
@@ -15,6 +16,7 @@ namespace Desktop.Robot.Extensions
 
         public static IRobot Type(this IRobot robot, string text, uint delay)
         {
+            Thread.Sleep((int)robot.AutoDelay);
             var currentDelay = robot.AutoDelay;
             robot.AutoDelay = delay;
             foreach (var ch in text)
