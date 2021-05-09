@@ -17,7 +17,7 @@ I made this library because the dotnet SDK doesn't support simulation of mouse a
 
 ## Advantages
 - Multiplatform: works on Windows, Linux and OSX
-- Built using the Operating System Native API, no other dependencies needed
+- Built using the Operating System Native and .NET API, other dependencies needed
 - Easy to use
 
 
@@ -36,10 +36,18 @@ namespace Example
             robot.AutoDelay = 1000;
             robot.MouseMove(100, 100);
             robot.Click();
-            robot.Type("A cat is using my PC");
+            robot.Type("A invisible cat is using my PC");
         }
     }
 }
+```
+
+## Remarks
+In order to use the method CreateScreenCapture you will need to install some libraries. This is required by System.Drawing's components
+
+### Installing the requirements on Linux
+```
+sudo apt install libgdiplus
 ```
 
 ## Current limitations

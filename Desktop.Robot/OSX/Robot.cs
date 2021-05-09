@@ -7,22 +7,11 @@ namespace Desktop.Robot.OSX
 {
     public class Robot : AbstractRobot
     {
-
-        public override Image CreateScreenCapture(Rectangle screenRect)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public override Color GetPixelColor(uint x, uint y)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void KeyDown(Key key)
         {
             ApplyAutoDelay();
-            sendCommandDown(key.GetKeycode());
+            var keycode = (ushort)key.GetKeycode().Keycode;
+            sendCommandDown(keycode);
         }
 
         public override void KeyDown(char key)
@@ -34,7 +23,8 @@ namespace Desktop.Robot.OSX
         public override void KeyPress(Key key)
         {
             ApplyAutoDelay();
-            sendCommand(key.GetKeycode());
+            var keycode = (ushort)key.GetKeycode().Keycode;
+            sendCommand(keycode);
         }
 
         public override void KeyPress(char key)
@@ -46,7 +36,8 @@ namespace Desktop.Robot.OSX
         public override void KeyUp(Key key)
         {
             ApplyAutoDelay();
-            sendCommandUp(key.GetKeycode());
+            var keycode = (ushort)key.GetKeycode().Keycode;
+            sendCommandUp(keycode);
         }
 
         public override void KeyUp(char key)

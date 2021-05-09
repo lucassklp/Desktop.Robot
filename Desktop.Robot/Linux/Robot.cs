@@ -7,11 +7,6 @@ namespace Desktop.Robot.Linux
 {
     public class Robot : AbstractRobot
     {
-        public override Image CreateScreenCapture(Rectangle screenRect)
-        {
-            throw new NotImplementedException();
-        }
-
         public override Point GetMousePosition()
         {
             var pos = Marshal.PtrToStringAnsi(getMousePosition());
@@ -22,15 +17,11 @@ namespace Desktop.Robot.Linux
             return new Point(coords[0], coords[1]);
         }
 
-        public override Color GetPixelColor(uint x, uint y)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void KeyDown(Key key)
         {
             ApplyAutoDelay();
-            pressKeyCode((int)key.GetKeycode(), false, key.GetScanCode());
+            var metadata = key.GetKeycode();
+            pressKeyCode(metadata.Keycode, false, metadata.ScanCode);
         }
 
         public override void KeyDown(char key)
@@ -43,8 +34,9 @@ namespace Desktop.Robot.Linux
         public override void KeyPress(Key key)
         {
             ApplyAutoDelay();
-            pressKeyCode((int)key.GetKeycode(), true, key.GetScanCode());
-            pressKeyCode((int)key.GetKeycode(), false, key.GetScanCode());
+            var metadata = key.GetKeycode();
+            pressKeyCode(metadata.Keycode, true, metadata.ScanCode);
+            pressKeyCode(metadata.Keycode, false, metadata.ScanCode);
         }
 
         public override void KeyPress(char key)
@@ -58,7 +50,8 @@ namespace Desktop.Robot.Linux
         public override void KeyUp(Key key)
         {
             ApplyAutoDelay();
-            pressKeyCode((int)key.GetKeycode(), false, key.GetScanCode());
+            var metadata = key.GetKeycode();
+            pressKeyCode(metadata.Keycode, false, metadata.ScanCode);
         }
 
         public override void KeyUp(char key)
@@ -91,7 +84,6 @@ namespace Desktop.Robot.Linux
 
         [DllImport("./x11.os", EntryPoint = "pressKeyCode")]
         private static extern IntPtr pressKeyCode(int code, bool down, int flags);
-
 
     }
 }

@@ -27,6 +27,15 @@ namespace Desktop.Robot.Extensions
             return robot;
         }
 
+        public static IRobot Type(this IRobot robot, params Key[] keys)
+        {
+            foreach (var ch in keys)
+            {
+                robot.KeyPress(ch);
+            }
+            return robot;
+        }
+
         public static IRobot CombineKeys(this IRobot robot, params Key[] keys)
         {
             var stack = new Stack<Key>();
