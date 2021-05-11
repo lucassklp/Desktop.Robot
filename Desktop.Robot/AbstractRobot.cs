@@ -1,11 +1,7 @@
 ﻿using Desktop.Robot.Clicks;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Drawing.Imaging;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Desktop.Robot
 {
@@ -13,11 +9,7 @@ namespace Desktop.Robot
     {
         public uint AutoDelay { get; set; }
 
-        public abstract Image CreateScreenCapture(Rectangle screenRect);
-
         public abstract Point GetMousePosition();
-
-        public abstract Color GetPixelColor(uint x, uint y);
 
         public abstract void KeyPress(Key key);
 
@@ -32,7 +24,19 @@ namespace Desktop.Robot
         public abstract void KeyUp(char key);
 
         public abstract void MouseMove(uint x, uint y);
+        public virtual Image CreateScreenCapture(Rectangle screenRect)
+        {
+            var bmp = new Bitmap(screenRect.Width, screenRect.Height, PixelFormat.Format32bppArgb);
+            var g = Graphics.FromImage(bmp);
+            g.CopyFromScreen(screenRect.Left, screenRect.Top, 0, 0, bmp.Size, CopyPixelOperation.SourceCopy);
+            return bmp;
+        }
 
+        public virtual Color GetPixelColor(uint x, uint y)
+        {
+            var rect = new Rectangle(new Point((int)x, (int)y), new Size(1, 1));
+            return (CreateScreenCapture(rect) as Bitmap).GetPixel(0, 0);
+        }
 
         public void Click(IClick click)
         {

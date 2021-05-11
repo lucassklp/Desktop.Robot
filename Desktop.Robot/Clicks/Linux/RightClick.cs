@@ -11,7 +11,8 @@ namespace Desktop.Robot.Clicks.Linux
 
         public void ExecuteClick(MouseContext context)
         {
-            throw new NotImplementedException();
+            Common.Click(true, Common.RIGHT_BUTTON);
+            Common.Click(false, Common.RIGHT_BUTTON);
         }
     }
 }

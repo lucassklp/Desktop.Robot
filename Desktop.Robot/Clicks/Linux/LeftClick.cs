@@ -10,7 +10,10 @@ namespace Desktop.Robot.Clicks.Linux
         }
         public void ExecuteClick(MouseContext context)
         {
-            throw new NotImplementedException();
+            Common.Click(true, Common.LEFT_BUTTON);
+            Common.Click(false, Common.LEFT_BUTTON);
         }
+
+
     }
 }

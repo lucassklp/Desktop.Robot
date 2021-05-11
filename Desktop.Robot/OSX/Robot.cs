@@ -7,22 +7,11 @@ namespace Desktop.Robot.OSX
 {
     public class Robot : AbstractRobot
     {
-
-        public override Image CreateScreenCapture(Rectangle screenRect)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public override Color GetPixelColor(uint x, uint y)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void KeyDown(Key key)
         {
             ApplyAutoDelay();
-            sendCommandDown(key.GetKeycode());
+            var keycode = (ushort)key.GetKeycode().Keycode;
+            sendCommandDown(keycode);
         }
 
         public override void KeyDown(char key)
@@ -34,7 +23,8 @@ namespace Desktop.Robot.OSX
         public override void KeyPress(Key key)
         {
             ApplyAutoDelay();
-            sendCommand(key.GetKeycode());
+            var keycode = (ushort)key.GetKeycode().Keycode;
+            sendCommand(keycode);
         }
 
         public override void KeyPress(char key)
@@ -46,7 +36,8 @@ namespace Desktop.Robot.OSX
         public override void KeyUp(Key key)
         {
             ApplyAutoDelay();
-            sendCommandUp(key.GetKeycode());
+            var keycode = (ushort)key.GetKeycode().Keycode;
+            sendCommandUp(keycode);
         }
 
         public override void KeyUp(char key)
@@ -77,31 +68,31 @@ namespace Desktop.Robot.OSX
         }
 
 
-        [DllImport("./macos.os", EntryPoint = "setMousePosition")]
+        [DllImport("./osx.os", EntryPoint = "setMousePosition")]
         private static extern void setMousePosition(uint x, uint y);
 
-        [DllImport("./macos.os", EntryPoint = "getMousePosition")]
+        [DllImport("./osx.os", EntryPoint = "getMousePosition")]
         private static extern IntPtr getMousePosition();
 
-        [DllImport("./macos.os", EntryPoint = "screenResolution")]
+        [DllImport("./osx.os", EntryPoint = "screenResolution")]
         private static extern IntPtr screenResolution();
 
-        [DllImport("./macos.os", EntryPoint = "keyPress")]
+        [DllImport("./osx.os", EntryPoint = "keyPress")]
         private static extern void keyPress(char ch);
 
-        [DllImport("./macos.os", EntryPoint = "keyUp")]
+        [DllImport("./osx.os", EntryPoint = "keyUp")]
         private static extern void keyUp(char ch);
 
-        [DllImport("./macos.os", EntryPoint = "keyDown")]
+        [DllImport("./osx.os", EntryPoint = "keyDown")]
         private static extern void keyDown(char ch);
 
-        [DllImport("./macos.os", EntryPoint = "sendCommand")]
+        [DllImport("./osx.os", EntryPoint = "sendCommand")]
         private static extern void sendCommand(ushort ch);
 
-        [DllImport("./macos.os", EntryPoint = "sendCommandUp")]
+        [DllImport("./osx.os", EntryPoint = "sendCommandUp")]
         private static extern void sendCommandUp(ushort ch);
 
-        [DllImport("./macos.os", EntryPoint = "sendCommandDown")]
+        [DllImport("./osx.os", EntryPoint = "sendCommandDown")]
         private static extern void sendCommandDown(ushort ch);
     }
 }

@@ -1,22 +1,11 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Runtime.InteropServices;
 
 namespace Desktop.Robot.Windows
 {
     public class Robot : AbstractRobot
     {
-
-        public override Image CreateScreenCapture(Rectangle screenRect)
-        {
-            var bmp = new Bitmap(screenRect.Width, screenRect.Height, PixelFormat.Format32bppArgb);
-            var g = Graphics.FromImage(bmp);
-            g.CopyFromScreen(screenRect.Left, screenRect.Top, 0, 0, bmp.Size, CopyPixelOperation.SourceCopy);
-            return bmp;
-        }
-
         public override Point GetMousePosition()
         {
             PointInter lpPoint;
@@ -24,16 +13,13 @@ namespace Desktop.Robot.Windows
             return (Point)lpPoint;
         }
 
-        public override Color GetPixelColor(uint x, uint y)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void KeyDown(Key key)
         {
             ApplyAutoDelay();
-            var keycode = (byte)key.GetKeycode();
-            keybd_event(keycode, (byte)key.GetScanCode(), 0, 0);
+            var metadata = key.GetKeycode();
+            var keycode = (byte)metadata.Keycode;
+            var scancode = (byte)metadata.ScanCode;
+            keybd_event(keycode, scancode, 0, 0);
         }
 
         public override void KeyDown(char key)
@@ -46,9 +32,11 @@ namespace Desktop.Robot.Windows
         public override void KeyPress(Key key)
         {
             ApplyAutoDelay();
-            var keycode = (byte)key.GetKeycode();
-            keybd_event(keycode, (byte)key.GetScanCode(), 0, 0);
-            keybd_event(keycode, (byte)key.GetScanCode(), 2, 0);
+            var metadata = key.GetKeycode();
+            var keycode = (byte)metadata.Keycode;
+            var scancode = (byte)metadata.ScanCode;
+            keybd_event(keycode, scancode, 0, 0);
+            keybd_event(keycode, scancode, 2, 0);
         }
 
         public override void KeyPress(char key)
@@ -62,8 +50,10 @@ namespace Desktop.Robot.Windows
         public override void KeyUp(Key key)
         {
             ApplyAutoDelay();
-            var keycode = (byte)key.GetKeycode();
-            keybd_event(keycode, (byte)key.GetScanCode(), 2, 0);
+            var metadata = key.GetKeycode();
+            var keycode = (byte)metadata.Keycode;
+            var scancode = (byte)metadata.ScanCode;
+            keybd_event(keycode, scancode, 2, 0);
         }
 
         public override void KeyUp(char key)
