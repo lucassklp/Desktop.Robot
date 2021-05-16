@@ -4,6 +4,14 @@
 #include <unistd.h>
 
 extern "C" {
+
+    bool SHIFT_ACTIVE = false;
+    bool ALT_ACTIVE = false;
+    bool COMMAND_ACTIVE = false;
+    bool CONTROL_ACTIVE = false;
+
+    UInt64 flags = 0;
+
     void setMousePosition(unsigned int x, unsigned int y){
         CGPoint point;
         point.x = x;
@@ -101,16 +109,76 @@ extern "C" {
         CGKeyCode inputKeyCode = input;
         CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
         CGEventRef saveCommandDown = CGEventCreateKeyboardEvent(source, inputKeyCode, true);
-        CGEventSetFlags(saveCommandDown, kCGEventFlagMaskCommand);
+
+        if (inputKeyCode == 55) {
+            COMMAND_ACTIVE = true;
+        } else if (inputKeyCode == 59) {
+            CONTROL_ACTIVE = true;
+        } else if (inputKeyCode == 58) {
+            ALT_ACTIVE = true;
+        } else if (inputKeyCode == 56) {
+            SHIFT_ACTIVE = true;
+        }
+
+        flags = 0;
+
+        if (COMMAND_ACTIVE) {
+            flags = flags | kCGEventFlagMaskCommand;
+        }
+
+        if (CONTROL_ACTIVE) {
+            flags = flags | kCGEventFlagMaskControl;
+        }
+
+        if (ALT_ACTIVE) {
+            flags = flags | kCGEventFlagMaskAlternate;
+        }
+
+        if (SHIFT_ACTIVE) {
+            flags = flags | kCGEventFlagMaskShift;
+        }
+
+        CGEventSetFlags(saveCommandDown, flags);
         CGEventPost(kCGAnnotatedSessionEventTap, saveCommandDown);
         CFRelease(saveCommandDown);
         CFRelease(source);
     }
 
     void sendCommandUp(short input){
+
         CGKeyCode inputKeyCode = input;
+
+        if (inputKeyCode == 55) {
+            COMMAND_ACTIVE = false;
+        } else if (inputKeyCode == 59) {
+            CONTROL_ACTIVE = false;
+        } else if (inputKeyCode == 58) {
+            ALT_ACTIVE = false;
+        } else if (inputKeyCode == 56) {
+            SHIFT_ACTIVE = false;
+        }
+
+        flags = 0;
+
+        if (COMMAND_ACTIVE) {
+            flags = flags | kCGEventFlagMaskCommand;
+        }
+
+        if (CONTROL_ACTIVE) {
+            flags = flags | kCGEventFlagMaskControl;
+        }
+
+        if (ALT_ACTIVE) {
+            flags = flags | kCGEventFlagMaskAlternate;
+        }
+
+        if (SHIFT_ACTIVE) {
+            flags = flags | kCGEventFlagMaskShift;
+        }
+
         CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
         CGEventRef saveCommandUp = CGEventCreateKeyboardEvent(source, inputKeyCode, false);
+        CGEventSetFlags(saveCommandUp, flags);
         CGEventPost(kCGAnnotatedSessionEventTap, saveCommandUp);
         CFRelease(saveCommandUp);
         CFRelease(source);

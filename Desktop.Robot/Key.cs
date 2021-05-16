@@ -102,7 +102,7 @@ namespace Desktop.Robot
         [Keycode(Platform = "Linux", Keycode = 0x0071)]
         Q,
 
-        [Keycode(Platform = "OSX", Keycode = 0x0C)]
+        [Keycode(Platform = "OSX", Keycode = 0x0F)]
         [Keycode(Platform = "Windows", Keycode = 0x52)]
         [Keycode(Platform = "Linux", Keycode = 0x0072)]
         R,
@@ -458,6 +458,18 @@ namespace Desktop.Robot
         [Keycode(Platform = "Windows", Keycode = 0x7B)]
         [Keycode(Platform = "Linux", Keycode = 0xffc9)]
         F12,
+
+        [Keycode(Platform = "OSX", Keycode = 0x7e)]
+        Up,
+
+        [Keycode(Platform = "OSX", Keycode = 0x7d)]
+        Down,
+
+        [Keycode(Platform = "OSX", Keycode = 0x7b)]
+        Left,
+
+        [Keycode(Platform = "OSX", Keycode = 0x7c)]
+        Right,
     }
 
     public static class KeysExtensions 
