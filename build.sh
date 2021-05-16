@@ -1,1 +1,1 @@
-cd Desktop.Robot/Source/x11 && make
+cd Desktop.Robot/Source/osx && make
