@@ -326,6 +326,11 @@ namespace Desktop.Robot
 
         /* Other keys */
 
+        [Keycode(Platform = "OSX", Keycode = 0x24)]
+        [Keycode(Platform = "Windows", Keycode = 0x0D)]
+        [Keycode(Platform = "Linux", Keycode = 0xff0d)]
+        Enter,
+
         [Keycode(Platform = "OSX", Keycode = 0x30)]
         [Keycode(Platform = "Windows", Keycode = 0x09, ScanCode = 0x8F)]
         [Keycode(Platform = "Linux", Keycode = 0xff09)]
