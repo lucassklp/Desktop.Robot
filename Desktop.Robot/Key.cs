@@ -299,6 +299,7 @@ namespace Desktop.Robot
 
         /* Modifiers */
         [Keycode(Platform = "OSX", Keycode = 0x37)]
+        [Keycode(Platform = "Windows", Keycode = 0x5b)]
         Command,
 
         [Keycode(Platform = "OSX", Keycode = 0x38)]
@@ -306,15 +307,18 @@ namespace Desktop.Robot
         [Keycode(Platform = "Linux", ScanCode = 0xffe1)]
         Shift,
 
-        [Keycode(Platform = "OSX", Keycode = 0x3A)]
-        Option,
-
         [Keycode(Platform = "OSX", Keycode = 0x3B)]
         [Keycode(Platform = "Windows", Keycode = 0xA2, ScanCode = 0x9D)]
         [Keycode(Platform = "Linux", Keycode = 0xffe3)]
         Control,
 
+        [Keycode(Platform = "OSX", Keycode = 0x3A)]
         [Keycode(Platform = "Windows", Keycode = 0x12, ScanCode = 0xB8)]
+        [Keycode(Platform = "Linux", Keycode = 0xffe9)]
+        Option,
+
+        [Keycode(Platform = "Windows", Keycode = 0x12, ScanCode = 0xB8)]
+        [Keycode(Platform = "OSX", Keycode = 0x3A)]
         [Keycode(Platform = "Linux", Keycode = 0xffe9)]
         Alt,
 
@@ -460,15 +464,19 @@ namespace Desktop.Robot
         F12,
 
         [Keycode(Platform = "OSX", Keycode = 0x7e)]
+        [Keycode(Platform = "Windows", Keycode = 0x26)]
         Up,
 
         [Keycode(Platform = "OSX", Keycode = 0x7d)]
+        [Keycode(Platform = "Windows", Keycode = 0x28)]
         Down,
 
         [Keycode(Platform = "OSX", Keycode = 0x7b)]
+        [Keycode(Platform = "Windows", Keycode = 0x25)]
         Left,
 
         [Keycode(Platform = "OSX", Keycode = 0x7c)]
+        [Keycode(Platform = "Windows", Keycode = 0x27)]
         Right,
     }
 
