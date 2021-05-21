@@ -15,6 +15,21 @@ This library helps you to automate tasks by simulating inputs (mouse and keyboar
 
 I made this library because the dotnet SDK doesn't support simulation of mouse and keyboard input. The only way of input simulation in the standard framework is by using Windows.Forms which won't run on Linux or OSX.
 
+## Installation
+
+If you are using Package Manager:
+
+```bash
+Install-Package Desktop.Robot -Version 1.1.0
+```
+
+If you are using .NET CLI
+
+```bash
+dotnet add package Desktop.Robot --version 1.1.0
+```
+
+
 ## Advantages
 - Multiplatform: works on Windows, Linux and OSX
 - Built using the Operating System Native and .NET API, other dependencies needed
