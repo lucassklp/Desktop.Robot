@@ -24,6 +24,12 @@ namespace Desktop.Robot
         public abstract void KeyUp(char key);
 
         public abstract void MouseMove(uint x, uint y);
+
+        public void MouseMove(Point p) 
+        {
+            MouseMove((uint)p.X, (uint)p.Y);
+        }
+
         public virtual Image CreateScreenCapture(Rectangle screenRect)
         {
             var bmp = new Bitmap(screenRect.Width, screenRect.Height, PixelFormat.Format32bppArgb);

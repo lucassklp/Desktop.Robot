@@ -91,5 +91,10 @@ namespace Desktop.Robot
         {
             robot.MouseMove(x, y);
         }
+
+        public void MouseMove(Point p)
+        {
+            robot.MouseMove(p);
+        }
     }
 }

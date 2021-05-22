@@ -16,7 +16,7 @@ namespace Example
             robot.OnMouseMove().Subscribe(position => Console.WriteLine(position));
             robot.AutoDelay = 1000;
             robot.MouseMove(700, 500);
-            robot.QuadraticBezierMoviment(new Point(700, 1200), TimeSpan.FromMilliseconds(1000));
+            robot.BezierMoviment(new Point(0, 0), TimeSpan.FromMilliseconds(1000));
             robot.Click();
             robot.Type("A invisible cat is using my PC", 125);
             robot.CombineKeys(Key.Alt, Key.Tab);

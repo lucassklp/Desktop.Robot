@@ -1,31 +1,42 @@
-﻿using System;
+﻿using Desktop.Robot.Windows;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace Desktop.Robot.Extensions
 {
     public static class BezierMouseMovimentExtension
     {
-
-        public static void QuadraticBezierMoviment(this IRobot robot, Point ending, TimeSpan duration)
+        public static void BezierMoviment(this IRobot robot, Point ending, TimeSpan duration)
         {
-            var randomFactor = new Random();
+            var random = new Random();
             var currentPosition = robot.GetMousePosition();
 
-            var x = randomFactor.Next(1, 500);
-            var y = randomFactor.Next(1, 500);
+            Rectangle size = new Rectangle(0, 0, 700, 700);
 
-            var calculatedControlPoint = new Point(x, y);
-            Console.WriteLine(calculatedControlPoint);
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                size = MonitorInfo.GetMonitorSize();
+            }
 
-            QuadraticBezierMoviment(robot, currentPosition, calculatedControlPoint, ending, duration);
+            var x = random.Next(0, size.Width);
+            var y = random.Next(0, size.Height);
+
+            var randomControlPoint = new Point(x, y);
+
+            BezierMoviment(robot, currentPosition, randomControlPoint, ending, duration);
         }
 
-        public static void QuadraticBezierMoviment(this IRobot robot, Point initial, Point controlPoint, Point ending, TimeSpan duration)
+
+        public static void BezierMoviment(this IRobot robot, Point controlPoint, Point ending, TimeSpan duration)
+        {
+            var currentPosition = robot.GetMousePosition();
+            BezierMoviment(robot, currentPosition, controlPoint, ending, duration);
+        }
+
+
+        public static void BezierMoviment(this IRobot robot, Point initial, Point controlPoint, Point ending, TimeSpan duration)
         {
             var points = new List<Point>();
             var increment = duration.Milliseconds > 1000 ? .001 : .01;
@@ -37,11 +48,20 @@ namespace Desktop.Robot.Extensions
 
             var interval = duration.TotalMilliseconds / points.Count;
 
-            foreach (var item in points)
+            robot.MouseMove(initial);
+
+            //Avoiding AutoDelay
+            var currentAutoDelay = robot.AutoDelay;
+            robot.AutoDelay = (uint)interval;
+
+            foreach (var point in points)
             {
-                Thread.Sleep((int)interval);
-                robot.MouseMove((uint)item.X, (uint)item.Y);
+                robot.MouseMove(point);
             }
+
+            robot.MouseMove((uint)ending.X, (uint)ending.Y);
+
+            robot.AutoDelay = currentAutoDelay;
         }
 
         private static Point GetPoint(double t, Point initial, Point controlPoint, Point ending)

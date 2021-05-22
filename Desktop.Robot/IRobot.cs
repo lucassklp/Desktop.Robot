@@ -17,6 +17,7 @@ namespace Desktop.Robot
         void Click(IClick click);
         void Delay(uint ms);
         void MouseMove(uint x, uint y);
+        void MouseMove(Point p);
         Point GetMousePosition();
     }
 }
