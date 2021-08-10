@@ -12,9 +12,9 @@ namespace Desktop.Robot.Clicks.Windows
         }
         public void ExecuteClick(MouseContext context)
         {
-            Common.RightClickUp((uint)context.Position.X, (uint)context.Position.Y);
-            Thread.Sleep(delay);
             Common.RightClickDown((uint)context.Position.X, (uint)context.Position.Y);
+            Thread.Sleep(delay);
+            Common.RightClickUp((uint)context.Position.X, (uint)context.Position.Y);
         }
     }
 }
