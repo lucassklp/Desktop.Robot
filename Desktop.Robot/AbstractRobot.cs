@@ -50,6 +50,18 @@ namespace Desktop.Robot
             click.ExecuteClick(new MouseContext(GetMousePosition()));
         }
 
+        public void MouseDown(IClick click)
+        {
+            ApplyAutoDelay();
+            click.ExecuteMouseDown(new MouseContext(GetMousePosition()));
+        }
+
+        public void MouseUp(IClick click)
+        {
+            ApplyAutoDelay();
+            click.ExecuteMouseUp(new MouseContext(GetMousePosition()));
+        }
+
         public void Delay(uint ms)
         {
             Thread.Sleep((int)ms);

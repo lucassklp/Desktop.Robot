@@ -6,6 +6,8 @@ namespace Desktop.Robot.Clicks.Windows
     {
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
         private const int MOUSEEVENTF_LEFTUP = 0x04;
+        private const int MOUSEEVENTF_MIDDLEDOWN = 0x20;
+        private const int MOUSEEVENTF_MIDDLEUP = 0x40;
         private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
         private const int MOUSEEVENTF_RIGHTUP = 0x10;
 
@@ -30,6 +32,16 @@ namespace Desktop.Robot.Clicks.Windows
         internal static void LeftClickDown(uint x, uint y)
         {
             mouse_event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
+        }
+
+        internal static void MiddleClickUp(uint x, uint y)
+        {
+            mouse_event(MOUSEEVENTF_MIDDLEUP, x, y, 0, 0);
+        }
+
+        internal static void MiddleClickDown(uint x, uint y)
+        {
+            mouse_event(MOUSEEVENTF_MIDDLEDOWN, x, y, 0, 0);
         }
     }
 }

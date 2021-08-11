@@ -1,17 +1,16 @@
-﻿using System;
-namespace Desktop.Robot.Clicks.Linux
+﻿namespace Desktop.Robot.Clicks.Linux
 {
-    internal class RightClick : IClick
+    internal record RightClick(int delay) : IClick
     {
-        private readonly int delay;
-        public RightClick(int delay)
-        {
-            this.delay = delay;
-        }
+        public int Delay => delay;
 
-        public void ExecuteClick(MouseContext context)
+        public void ExecuteMouseDown(MouseContext context)
         {
             Common.Click(true, Common.RIGHT_BUTTON);
+        }
+
+        public void ExecuteMouseUp(MouseContext context)
+        {
             Common.Click(false, Common.RIGHT_BUTTON);
         }
     }

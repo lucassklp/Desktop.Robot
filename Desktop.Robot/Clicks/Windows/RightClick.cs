@@ -1,20 +1,17 @@
-﻿using System;
-using System.Threading;
-
-namespace Desktop.Robot.Clicks.Windows
+﻿namespace Desktop.Robot.Clicks.Windows
 {
-    internal class RightClick : IClick
+    internal record RightClick(int delay) : IClick
     {
-        private readonly int delay;
-        public RightClick(int delay)
+        public int Delay => delay;
+
+        public void ExecuteMouseDown(MouseContext context)
         {
-            this.delay = delay;
+            Common.RightClickDown((uint)context.Position.X, (uint)context.Position.Y);
         }
-        public void ExecuteClick(MouseContext context)
+
+        public void ExecuteMouseUp(MouseContext context)
         {
             Common.RightClickUp((uint)context.Position.X, (uint)context.Position.Y);
-            Thread.Sleep(delay);
-            Common.RightClickDown((uint)context.Position.X, (uint)context.Position.Y);
         }
     }
 }
