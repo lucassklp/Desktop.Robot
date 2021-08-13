@@ -6,12 +6,12 @@
 
         public void ExecuteMouseDown(MouseContext context)
         {
-            Common.RightClickDown((uint)context.Position.X, (uint)context.Position.Y);
+            Common.LeftClickDown((uint)context.Position.X, (uint)context.Position.Y);
         }
 
         public void ExecuteMouseUp(MouseContext context)
         {
-            Common.RightClickUp((uint)context.Position.X, (uint)context.Position.Y);
+            Common.LeftClickUp((uint)context.Position.X, (uint)context.Position.Y);
         }
     }
 }
