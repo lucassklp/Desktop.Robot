@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.Numerics;
 using System.Threading;
 
 namespace Desktop.Robot.Extensions
@@ -43,24 +45,23 @@ namespace Desktop.Robot.Extensions
         /// <param name="duration">The duration of motion</param>
         public static void LinearMoviment(this IRobot robot, Point destination, TimeSpan duration)
         {
-            var delay = robot.AutoDelay;
+            var delay = robot.AutoDelay; // save to restore after
             robot.AutoDelay = 0;
             Point start = robot.GetMousePosition();
-            PointF iterPoint = start;
-            var steps = Convert.ToInt64(duration.TotalMilliseconds / 5);
-
-            PointF slope = new PointF(destination.X - start.X, destination.Y - start.Y);
-
-            slope.X = slope.X / steps;
-            slope.Y = slope.Y / steps;
-
-            for (int i = 0; i < steps; i++)
-            {
-                iterPoint = new PointF(iterPoint.X + slope.X, iterPoint.Y + slope.Y);
-                robot.MouseMove(Point.Round(iterPoint));
-                Thread.Sleep(5);
+            var sw = new Stopwatch();
+            sw.Start();
+            const int animTime = 5; // animate movement in 5ms increments
+            var total = (float)duration.TotalMilliseconds;
+            var from = new Vector2(start.X, start.Y);
+            var to = new Vector2(destination.X, destination.Y);
+            while(sw.ElapsedMilliseconds < total - animTime) {
+                // lerp between start and end
+                var iterPoint = from + (to - from) * (sw.ElapsedMilliseconds / total);
+                robot.MouseMove(Point.Round(new PointF(iterPoint.X, iterPoint.Y)));
+                Thread.Sleep(animTime);
             }
 
+            sw.Stop();
             robot.MouseMove(destination);
             robot.AutoDelay = delay;
         }
