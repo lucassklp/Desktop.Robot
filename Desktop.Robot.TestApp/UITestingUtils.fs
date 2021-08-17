@@ -66,6 +66,7 @@ let waitInitialized (control:Control) = async {
         do! Async.AwaitTask tcs.Task
 }
 
+// do an action and return the first element of observation
 let attemptUIAction (observation:IObservable<_>) action = async {
     let tcs = TaskCompletionSource<_>()
     use _ = observation.FirstAsync().Subscribe(tcs.SetResult)
@@ -73,6 +74,16 @@ let attemptUIAction (observation:IObservable<_>) action = async {
     return! Async.AwaitOrTimeout(Async.AwaitTask tcs.Task, TimeSpan.FromSeconds 1.)
 }
 
+// do action on threadpool then switch back to original context
+let robotDoOnThreadpool action = async {
+    let context = SynchronizationContext.Current
+    do! Async.SwitchToThreadPool() // run robot actions on threadpool so that GUI thread can handle events in message loop
+    let! res = action
+    do! Async.SwitchToContext context //switch back to GUI context for checking events/results
+    return res
+}
+
+// collect list of elements from observation that occur while doing action. Does action with robotDoOnThreadpool
 let attemptUIActionList (observation:IObservable<_>) action = async {
     let tcs = TaskCompletionSource<_>()
     // in order to wait for events to propagate from UI to collect into list,
@@ -87,10 +98,7 @@ let attemptUIActionList (observation:IObservable<_>) action = async {
         |> Observable.map List.rev // the fold stared at tail
 
     use _ = observations.Subscribe(tcs.SetResult)
-    let context = SynchronizationContext.Current
-    do! Async.SwitchToThreadPool() // run robot actions on threadpool so that GUI thread can handle events in message loop
-    do! action // do the robot actions
-    do! Async.SwitchToContext context //switch back to GUI context to finalise collecting events
+    do! robotDoOnThreadpool action
     use _ = stop.Connect()
     let! observedList = Async.AwaitOrTimeout(Async.AwaitTask tcs.Task, TimeSpan.FromSeconds 5.)
     return observedList |> Option.defaultValue []

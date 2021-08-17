@@ -4,7 +4,6 @@ open Avalonia
 open Avalonia.Controls
 open Expecto
 open System.Reactive.Linq
-open Avalonia.Media
 open System
 open Desktop.Robot
 open Desktop.Robot.Extensions
@@ -40,10 +39,13 @@ let noMouseButtonsPressed = {
 }
 
 let tests (window:Window) = testList "Mouse tests" [
-    let uiTestAsync = testWithWindow window
-    let uiTest name test = uiTestAsync name <| async { test() }
+    let uiTest = testWithWindow window
 
-    uiTestAsync "Can click" <| async {
+    // for these mouse tests, it's important they are done in order
+    // because the earlier ones like clicking assume the mouse is
+    // already over the window
+
+    uiTest "Can click" <| async {
         let btn = Button()
         btn.Content <- "Can left click?"
         window.Content <- btn
@@ -55,7 +57,7 @@ let tests (window:Window) = testList "Mouse tests" [
     }
 
     let testClick mouseButton =
-        uiTestAsync (sprintf "Mouse click %A presses and releases" mouseButton) <| async {
+        uiTest (sprintf "Mouse click %A presses and releases" mouseButton) <| async {
             // get properties as soon as press happens to get state at the time of the event
             let pressed = window.PointerPressed.Select(fun e -> e.GetCurrentPoint(window).Properties |> getMouseButtonsState)
             let released = window.PointerReleased.Select(fun e -> e.GetCurrentPoint(window).Properties |> getMouseButtonsState)
@@ -76,7 +78,7 @@ let tests (window:Window) = testList "Mouse tests" [
         }
 
     let testMouseDownUp mouseButton =
-        uiTestAsync (sprintf "Mouse down then up separately %A" mouseButton) <| async {
+        uiTest (sprintf "Mouse down then up separately %A" mouseButton) <| async {
             // get properties as soon as press happens to get state at the time of the event
             let pressed = window.PointerPressed.Select(fun e -> e.GetCurrentPoint(window).Properties |> getMouseButtonsState, DateTime.Now)
             let released = window.PointerReleased.Select(fun e -> e.GetCurrentPoint(window).Properties |> getMouseButtonsState, DateTime.Now)
@@ -108,7 +110,7 @@ let tests (window:Window) = testList "Mouse tests" [
     testMouseDownUp RightButton
     testMouseDownUp MiddleButton
 
-    uiTestAsync "Can move to point" <| async {
+    uiTest "Can move to point" <| async {
         let toPixelPoint (p:Point) = PixelPoint(int p.X, int p.Y)
         let toDrawingPoint (p:PixelPoint) = Drawing.Point(p.X, p.Y)
         let center = toPixelPoint window.Bounds.Center
@@ -129,7 +131,7 @@ let tests (window:Window) = testList "Mouse tests" [
         Expect.equal eventPos center "Should move mouse to center of control"
     }
 
-    uiTestAsync "Can move linear" <| async {
+    uiTest "Can move linear" <| async {
         let toPixelPoint (p:Point) = PixelPoint(int p.X, int p.Y)
         let toScreenPoint (p:Point) =
             let sp = window.PointToScreen(p)
@@ -152,7 +154,7 @@ let tests (window:Window) = testList "Mouse tests" [
         Expect.isDescending yPositions "Should move bottom to top"
     }
 
-    uiTestAsync "TimeSpan for linear movement" <| async {
+    uiTest "TimeSpan for linear movement" <| async {
         let toScreenPoint (p:Point) =
             let sp = window.PointToScreen(p)
             Drawing.Point(sp.X, sp.Y)

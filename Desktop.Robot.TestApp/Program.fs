@@ -31,6 +31,7 @@ type MainWindow() as this =
             let config = { defaultConfig with runInParallel = false }
             let tests = testSequenced <| testList "Desktop.Robot test app" [
                 MouseTests.tests this
+                KeyboardTests.tests this
             ]
             let uiContext = AvaloniaSynchronizationContext.Current
 
