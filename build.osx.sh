@@ -1,0 +1,1 @@
+cd Desktop.Robot/Source/osx && make

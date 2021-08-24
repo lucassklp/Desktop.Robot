@@ -22,9 +22,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
-
     - name: Build
       run: |
         cd Desktop.Robot

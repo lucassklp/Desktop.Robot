@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Version>1.2.1</Version>
+    <Version>1.2.2-alpha</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Lucas Simas</Authors>
     <Description>A library used to control your mouse and keyboard programmatically in .NET Core</Description>
@@ -27,15 +27,10 @@
     </EmbeddedResource>
   </ItemGroup>
 
-    <ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="x11.os" Pack="true">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="OSX\" />
-    <Folder Include="Linux\" />
-    <Folder Include="Clicks\Linux\" />
-  </ItemGroup>
 </Project>
