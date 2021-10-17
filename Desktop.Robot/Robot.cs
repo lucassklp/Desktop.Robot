@@ -87,6 +87,11 @@ namespace Desktop.Robot
             robot.KeyUp(key);
         }
 
+        public void MouseDown(IClick click)
+        {
+            robot.MouseDown(click);
+        }
+
         public void MouseMove(uint x, uint y)
         {
             robot.MouseMove(x, y);
@@ -95,6 +100,11 @@ namespace Desktop.Robot
         public void MouseMove(Point p)
         {
             robot.MouseMove(p);
+        }
+
+        public void MouseUp(IClick click)
+        {
+            robot.MouseUp(click);
         }
     }
 }

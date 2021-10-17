@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <WarnOn>3390;$(WarnOn)</WarnOn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="UITestingUtils.fs" />
+    <Compile Include="KeyboardTests.fs" />
+    <Compile Include="MouseTests.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Desktop.Robot\Desktop.Robot.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.6" />
+    <PackageReference Include="Expecto" Version="9.0.2" />
+    <PackageReference Include="Expecto.Diff" Version="9.0.2" />
+    <PackageReference Include="Expecto.FsCheck" Version="9.0.2" />
+    <PackageReference Include="FSharp.Control.Reactive" Version="5.0.2" />
+  </ItemGroup>
+</Project>

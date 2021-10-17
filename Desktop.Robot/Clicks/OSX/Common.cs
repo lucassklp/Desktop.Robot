@@ -16,5 +16,12 @@ namespace Desktop.Robot.Clicks.OSX
 
         [DllImport("./osx.os", EntryPoint = "leftMouseDown")]
         internal static extern void LeftClickDown(uint x, uint y);
+
+
+        [DllImport("./osx.os", EntryPoint = "otherMouseUp")]
+        internal static extern void OtherClickUp(uint x, uint y);
+
+        [DllImport("./osx.os", EntryPoint = "otherMouseDown")]
+        internal static extern void OtherClickDown(uint x, uint y);
     }
 }

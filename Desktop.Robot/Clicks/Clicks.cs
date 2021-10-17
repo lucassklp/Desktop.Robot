@@ -15,6 +15,11 @@ namespace Desktop.Robot.Clicks
             return LeftButton(150);
         }
 
+        public static IClick MiddleButton()
+        {
+            return MiddleButton(150);
+        }
+
         public static IClick RightButton(int delay)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
@@ -48,6 +53,26 @@ namespace Desktop.Robot.Clicks
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 return new Linux.LeftClick(delay);
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
+        }
+
+        public static IClick MiddleButton(int delay)
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                return new OSX.MiddleClick(delay);
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return new Windows.MiddleClick(delay);
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return new Linux.MiddleClick(delay);
             }
             else
             {
