@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Version>1.2.2-alpha</Version>
+    <Version>1.2.3-alpha</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Lucas Simas</Authors>
     <Description>A library used to control your mouse and keyboard programmatically in .NET Core</Description>
@@ -22,15 +22,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="osx.os" Pack="true">
+    <None Include="osx.os">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="x11.os" Pack="true">
+      <PackagePath>build\</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="x11.os">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+      <PackagePath>build\</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="Desktop.Robot.targets">
+      <PackagePath>build\</PackagePath>
+      <Pack>true</Pack>
+    </None>
   </ItemGroup>
 
 </Project>
