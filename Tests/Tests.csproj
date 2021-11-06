@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Desktop.Robot" Version="1.2.2-alpha" />
+    <PackageReference Include="Desktop.Robot" Version="1.2.3" />
   </ItemGroup>
 
 </Project>
