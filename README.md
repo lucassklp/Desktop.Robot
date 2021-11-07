@@ -2,11 +2,11 @@
   <img src="Resources/logo.png" width="300px">
 </p>
 <p align="center">
-    <img alt="nuget" src="https://img.shields.io/nuget/dt/Desktop.Robot.svg">
+    <a href="https://www.nuget.org/packages/Desktop.Robot"><img alt="nuget" src="https://img.shields.io/nuget/dt/Desktop.Robot.svg"></a>
 <a href="https://www.codacy.com/gh/lucassklp/Desktop.Robot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lucassklp/Desktop.Robot&amp;utm_campaign=Badge_Grade">
         <img src="https://app.codacy.com/project/badge/Grade/985f1cdd1034486cbb00a3fd3e4fff19"/>
     </a>
-    <img alt="nuget version" src="https://img.shields.io/nuget/v/Desktop.Robot.svg">
+    <a href="https://www.nuget.org/packages/Desktop.Robot"><img alt="nuget version" src="https://img.shields.io/nuget/v/Desktop.Robot.svg"></a>
 </p>
 
 # Desktop.Robot
