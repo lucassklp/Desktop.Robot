@@ -150,52 +150,52 @@ namespace Desktop.Robot
         
         //Numbers
         [Keycode(Platform = "OSX", Keycode = 0x30)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0x30)]
         [Keycode(Platform = "Linux", Keycode = 0x0030)]
         Zero,
 
         [Keycode(Platform = "OSX", Keycode = 0x31)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0x31)]
         [Keycode(Platform = "Linux", Keycode = 0x0031)]
         One,
         
         [Keycode(Platform = "OSX", Keycode = 0x32)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0x32)]
         [Keycode(Platform = "Linux", Keycode = 0x0032)]
         Two,
         
         [Keycode(Platform = "OSX", Keycode = 0x33)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0x33)]
         [Keycode(Platform = "Linux", Keycode = 0x0033)]
         Three,
         
         [Keycode(Platform = "OSX", Keycode = 0x34)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0x34)]
         [Keycode(Platform = "Linux", Keycode = 0x0034)]
         Four,
         
         [Keycode(Platform = "OSX", Keycode = 0x35)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0x35)]
         [Keycode(Platform = "Linux", Keycode = 0x0035)]
         Five,
         
         [Keycode(Platform = "OSX", Keycode = 0x36)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0x36)]
         [Keycode(Platform = "Linux", Keycode = 0x0036)]
         Six,
         
         [Keycode(Platform = "OSX", Keycode = 0x37)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0x37)]
         [Keycode(Platform = "Linux", Keycode = 0x0037)]
         Seven,
         
         [Keycode(Platform = "OSX", Keycode = 0x38)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0x38)]
         [Keycode(Platform = "Linux", Keycode = 0x0038)]
         Eight,
         
         [Keycode(Platform = "OSX", Keycode = 0x39)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0x39)]
         [Keycode(Platform = "Linux", Keycode = 0x0039)]
         Nine,
 
