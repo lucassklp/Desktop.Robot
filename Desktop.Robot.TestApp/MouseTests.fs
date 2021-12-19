@@ -145,7 +145,7 @@ let tests (window:Window) = testList "Mouse tests" [
         let duration = TimeSpan.FromMilliseconds 200.
         let! movedEvents = attemptUIActionList pointerMoved <| async {
             Robot().MouseMove(bottomLeft) // goto bottom left at start
-            Robot().LinearMoviment(topRight, duration) // then move mouse towards the top right
+            Robot().LinearMovement(topRight, duration) // then move mouse towards the top right
         }
         Expect.isGreaterThan movedEvents.Length 10 "LinearMovement should lead to a many PointerMoved events"
         let xPositions = movedEvents |> Seq.skip 2 |> Seq.map (fun p -> p.X) // skip goto at start
@@ -166,7 +166,7 @@ let tests (window:Window) = testList "Mouse tests" [
         let duration = TimeSpan.FromMilliseconds 150.
         let sw = Diagnostics.Stopwatch()
         sw.Start()
-        Robot().LinearMoviment(topRight, duration) // then move mouse towards the top right
+        Robot().LinearMovement(topRight, duration) // then move mouse towards the top right
         sw.Stop()
 
         let actualDuration = sw.Elapsed

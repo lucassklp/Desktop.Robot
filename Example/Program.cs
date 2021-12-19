@@ -4,7 +4,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Threading;
+
 
 namespace Example
 {
@@ -16,7 +16,7 @@ namespace Example
             robot.OnMouseMove().Subscribe(position => Console.WriteLine(position));
             robot.AutoDelay = 1000;
             robot.MouseMove(700, 500);
-            robot.BezierMoviment(new Point(0, 0), TimeSpan.FromMilliseconds(1000));
+            robot.BezierMovement(new Point(0, 0), TimeSpan.FromMilliseconds(1000));
             robot.Click();
             robot.Type("A invisible cat is using my PC", 125);
             robot.CombineKeys(Key.Alt, Key.Tab);

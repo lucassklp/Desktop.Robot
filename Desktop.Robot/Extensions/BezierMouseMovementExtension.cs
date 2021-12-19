@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace Desktop.Robot.Extensions
 {
-    public static class BezierMouseMovimentExtension
+    public static class BezierMouseMovementExtension
     {
-        public static void BezierMoviment(this IRobot robot, Point ending, TimeSpan duration)
+        public static void BezierMovement(this IRobot robot, Point ending, TimeSpan duration)
         {
             var random = new Random();
             var currentPosition = robot.GetMousePosition();
@@ -25,18 +25,18 @@ namespace Desktop.Robot.Extensions
 
             var randomControlPoint = new Point(x, y);
 
-            BezierMoviment(robot, currentPosition, randomControlPoint, ending, duration);
+            BezierMovement(robot, currentPosition, randomControlPoint, ending, duration);
         }
 
 
-        public static void BezierMoviment(this IRobot robot, Point controlPoint, Point ending, TimeSpan duration)
+        public static void BezierMovement(this IRobot robot, Point controlPoint, Point ending, TimeSpan duration)
         {
             var currentPosition = robot.GetMousePosition();
-            BezierMoviment(robot, currentPosition, controlPoint, ending, duration);
+            BezierMovement(robot, currentPosition, controlPoint, ending, duration);
         }
 
 
-        public static void BezierMoviment(this IRobot robot, Point initial, Point controlPoint, Point ending, TimeSpan duration)
+        public static void BezierMovement(this IRobot robot, Point initial, Point controlPoint, Point ending, TimeSpan duration)
         {
             var points = new List<Point>();
             var increment = duration.Milliseconds > 1000 ? .001 : .01;
