@@ -6,36 +6,36 @@ using System.Threading;
 
 namespace Desktop.Robot.Extensions
 {
-    public static class LinearMouseMovimentExtension
+    public static class LinearMouseMovementExtension
     {
         /// <summary>
-        /// Simulate a mouse linear moviment to a destination point. The default duration of motion is 500ms
+        /// Simulate a mouse linear movement to a destination point. The default duration of motion is 500ms
         /// </summary>
         /// <param name="x">The Axis-X value of destination</param>
         /// <param name="y">The Axis-Y value of destination</param>
-        public static void LinearMoviment(this IRobot robot, int x, int y)
+        public static void LinearMovement(this IRobot robot, int x, int y)
         {
-            LinearMoviment(robot, x, y, TimeSpan.FromMilliseconds(500));
+            LinearMovement(robot, x, y, TimeSpan.FromMilliseconds(500));
         }
 
         /// <summary>
-        /// Simulate a mouse linear moviment to a destination point given a duration.
+        /// Simulate a mouse linear movement to a destination point given a duration.
         /// </summary>
         /// <param name="x">The Axis-X value of destination</param>
         /// <param name="y">The Axis-Y value of destination</param>
         /// <param name="duration">The duration of motion</param>
-        public static void LinearMoviment(this IRobot robot, int x, int y, TimeSpan duration)
+        public static void LinearMovement(this IRobot robot, int x, int y, TimeSpan duration)
         {
-            LinearMoviment(robot, new Point(x, y), duration);
+            LinearMovement(robot, new Point(x, y), duration);
         }
 
         /// <summary>
-        /// Simulate a mouse linear moviment to a destination point. The default duration of motion is 500ms
+        /// Simulate a mouse linear movement to a destination point. The default duration of motion is 500ms
         /// </summary>
         /// <param name="destination">The coordinate of destination</param>
-        public static void LinearMoviment(this IRobot robot, Point destination)
+        public static void LinearMovement(this IRobot robot, Point destination)
         {
-            LinearMoviment(robot, destination, TimeSpan.FromMilliseconds(500));
+            LinearMovement(robot, destination, TimeSpan.FromMilliseconds(500));
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Desktop.Robot.Extensions
         /// </summary>
         /// <param name="destination">The coordinate of destination</param>
         /// <param name="duration">The duration of motion</param>
-        public static void LinearMoviment(this IRobot robot, Point destination, TimeSpan duration)
+        public static void LinearMovement(this IRobot robot, Point destination, TimeSpan duration)
         {
             var delay = robot.AutoDelay; // save to restore after
             robot.AutoDelay = 0;
