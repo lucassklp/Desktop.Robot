@@ -33,7 +33,7 @@ jobs:
     - name: Push Desktop.Robot to GitHub registry
       run: |
         dotnet nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/lucassklp/index.json -Username lucassklp -Password ${{ secrets.GITHUB_TOKEN }}
-        dotnet nuget push ./Desktop.Robot/out/*.nupkg --skip-duplicate
+        dotnet nuget push ./Desktop.Robot/out/*.nupkg
 
     - name: Publish Desktop.Robot to nuget.org
       uses: brandedoutcast/publish-nuget@v2.5.5
