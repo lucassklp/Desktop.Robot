@@ -92,6 +92,68 @@ namespace Desktop.Robot.Windows
         [DllImport("user32.dll")]
         private static extern short VkKeyScan(char ch);
 
+		[DllImport("user32.dll", SetLastError = true)]
+		private static extern uint SendInput(uint inputCount, Input[] input, int size);
 
-    }
+		[StructLayout(LayoutKind.Sequential)]
+		private struct Input
+		{
+			public InputType Type { get; set; }
+			public MouseInput MouseInputWithUnion { get; set; }
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct MouseInput
+		{
+			int dx =0;
+			int dy =0;
+			int mouseData = 0;
+			MouseState dwFlags;
+			int time = 0;
+			nint dwExtraInfo = 0;
+			public MouseInput(MouseState dwFlags)
+			{
+				this.dwFlags = dwFlags;
+			}
+
+			public MouseInput(int scroll, MouseState dwFlags)
+			{
+				mouseData = scroll;
+				this.dwFlags = dwFlags;
+			}
+		}
+
+		[Flags]
+		public enum MouseState : uint
+		{
+			LeftDown = 2,
+			LeftUp = 4,
+			MiddleDown = 32,
+			MiddleUp = 64,
+			Move = 1,
+			Absolute = 32768,
+			RightDown = 8,
+			RightUp = 16,
+			MouseWheelUpDown = 2048,
+			MouseWheelLeftRight = 4096
+		}
+
+		public enum InputType : uint
+		{
+			Mouse = 0,
+			Keyboard = 1,
+			Hardware = 3
+		}
+
+		public override void MouseScrollVertical(int value)
+		{
+			var input = new Input
+			{
+				Type = InputType.Mouse,
+				MouseInputWithUnion = new MouseInput(value, MouseState.MouseWheelUpDown)
+			};
+			if (SendInput(1, new Input[] { input }, Marshal.SizeOf(input)) == 0)
+				throw new Exception();
+		}
+	}
 }
