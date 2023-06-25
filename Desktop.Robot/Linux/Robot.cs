@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Desktop.Robot.Clicks.Linux;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Desktop.Robot.Linux
 {
@@ -85,5 +87,20 @@ namespace Desktop.Robot.Linux
         [DllImport("./x11.os", EntryPoint = "pressKeyCode")]
         private static extern IntPtr pressKeyCode(int code, bool down, int flags);
 
-    }
+		public override void MouseScrollVertical(int value)
+		{
+            if (value < 0)
+            {
+                click(true, Common.UP_BUTTON);
+                Thread.Sleep(value);
+                click(false, Common.UP_BUTTON);
+            }
+            else
+			{
+				click(true, Common.DOWN_BUTTON);
+				Thread.Sleep(value);
+				click(false, Common.DOWN_BUTTON);
+			}
+		}
+	}
 }
