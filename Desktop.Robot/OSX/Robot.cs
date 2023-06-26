@@ -67,8 +67,12 @@ namespace Desktop.Robot.OSX
             return new Point(coords[0], screenRes[1] - coords[1]);
         }
 
+		public override void MouseScrollVertical(int value)
+		{
+			verticalScroll(value);
+		}
 
-        [DllImport("./osx.os", EntryPoint = "setMousePosition")]
+		[DllImport("./osx.os", EntryPoint = "setMousePosition")]
         private static extern void setMousePosition(uint x, uint y);
 
         [DllImport("./osx.os", EntryPoint = "getMousePosition")]
@@ -94,5 +98,9 @@ namespace Desktop.Robot.OSX
 
         [DllImport("./osx.os", EntryPoint = "sendCommandDown")]
         private static extern void sendCommandDown(ushort ch);
-    }
+
+        [DllImport("./osx.os", EntryPoint = "verticalScroll")]
+        private static extern void verticalScroll(int value);
+
+	}
 }
