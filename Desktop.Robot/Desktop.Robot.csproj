@@ -23,9 +23,9 @@
 
   <ItemGroup>
 	<None Include="osx.os">
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		<PackagePath>build\</PackagePath>
-		<Pack>true</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  <PackagePath>build\</PackagePath>
+	  <Pack>true</Pack>
 	</None>
     <None Include="x11.os">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
