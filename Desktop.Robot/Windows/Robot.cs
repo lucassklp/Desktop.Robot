@@ -105,21 +105,30 @@ namespace Desktop.Robot.Windows
 		[StructLayout(LayoutKind.Sequential)]
 		public struct MouseInput
 		{
-			int dx =0;
-			int dy =0;
-			int mouseData = 0;
+			int dx;
+			int dy;
+			int mouseData;
 			MouseState dwFlags;
-			int time = 0;
-			nint dwExtraInfo = 0;
+			int time;
+			nint dwExtraInfo;
 			public MouseInput(MouseState dwFlags)
 			{
+                dx = 0;
+                dy = 0;
+				mouseData = 0;
 				this.dwFlags = dwFlags;
+                time = 0;
+                dwExtraInfo = 0;
 			}
 
 			public MouseInput(int scroll, MouseState dwFlags)
 			{
+				dx = 0;
+                dy = 0;
 				mouseData = scroll;
 				this.dwFlags = dwFlags;
+                time = 0;
+                dwExtraInfo = 0;
 			}
 		}
 
@@ -152,7 +161,8 @@ namespace Desktop.Robot.Windows
 				Type = InputType.Mouse,
 				MouseInputWithUnion = new MouseInput(value, MouseState.MouseWheelUpDown)
 			};
-			if (SendInput(1, new Input[] { input }, Marshal.SizeOf(input)) == 0)
+            var responce = SendInput(1, new Input[] { input }, Marshal.SizeOf(input));
+			if (responce == 0)
 				throw new Exception();
 		}
 	}
