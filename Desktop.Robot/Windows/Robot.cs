@@ -104,7 +104,7 @@ namespace Desktop.Robot.Windows
 
 			public bool Equals(Input other)
 			{
-				return this.Type == other.Type 
+				return this.Type == other.Type
 					? this.MouseInputWithUnion.Equals(other.MouseInputWithUnion)
 					: false;
 			}
@@ -171,7 +171,7 @@ namespace Desktop.Robot.Windows
 
 		public override void MouseScrollVertical(int value)
 		{
-			var input = new Input[1]
+			var input = new Input[]
 			{
 				new Input
 				{
