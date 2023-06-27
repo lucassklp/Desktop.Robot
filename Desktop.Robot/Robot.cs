@@ -51,7 +51,7 @@ namespace Desktop.Robot
             return robot.GetMousePosition();
         }
 
-        public Color GetPixelColor(uint x, uint y)
+        public Color GetPixelColor(int x, int y)
         {
             return robot.GetPixelColor(x, y);
         }
@@ -92,7 +92,7 @@ namespace Desktop.Robot
             robot.MouseDown(click);
         }
 
-        public void MouseMove(uint x, uint y)
+        public void MouseMove(int x, int y)
         {
             robot.MouseMove(x, y);
         }

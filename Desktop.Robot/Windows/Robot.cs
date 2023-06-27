@@ -64,7 +64,7 @@ namespace Desktop.Robot.Windows
 			keybd_event(keycode, 0, 2, 0);
 		}
 
-		public override void MouseMove(uint x, uint y)
+		public override void MouseMove(int x, int y)
 		{
 			ApplyAutoDelay();
 			SetCursorPos(x, y);
@@ -72,7 +72,7 @@ namespace Desktop.Robot.Windows
 
 		[DllImport("user32.dll")]
 		[return: MarshalAs(UnmanagedType.Bool)]
-		static extern bool SetCursorPos(uint x, uint y);
+		static extern bool SetCursorPos(int x, int y);
 
 
 		[StructLayout(LayoutKind.Sequential)]
@@ -179,8 +179,8 @@ namespace Desktop.Robot.Windows
 					MouseInputWithUnion = new MouseInput(value, MouseState.MouseWheelUpDown)
 				}
 			};
-			var responce = SendInput(1, input, Marshal.SizeOf(input));
-			Debug.Assert(responce == 0);
+			var response = SendInput(1, input, Marshal.SizeOf(input));
+			Debug.Assert(response == 0);
 		}
 	}
 }

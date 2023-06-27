@@ -59,7 +59,7 @@ namespace Desktop.Robot.Extensions
                 robot.MouseMove(point);
             }
 
-            robot.MouseMove((uint)ending.X, (uint)ending.Y);
+            robot.MouseMove(ending.X, ending.Y);
 
             robot.AutoDelay = currentAutoDelay;
         }
