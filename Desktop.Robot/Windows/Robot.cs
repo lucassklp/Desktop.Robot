@@ -171,7 +171,7 @@ namespace Desktop.Robot.Windows
 
 		public override void MouseScrollVertical(int value)
 		{
-			var input = new[]
+			var inputs = new[]
 			{
 				new Input
 				{
@@ -179,7 +179,7 @@ namespace Desktop.Robot.Windows
 					MouseInputWithUnion = new MouseInput(value, MouseState.MouseWheelUpDown)
 				}
 			};
-			var response = SendInput(1, input, Marshal.SizeOf(input));
+			var response = SendInput(1, inputs, Marshal.SizeOf(inputs[0]));
 			Debug.Assert(response == 0);
 		}
 	}
