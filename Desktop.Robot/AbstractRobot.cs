@@ -75,5 +75,6 @@ namespace Desktop.Robot
             }
         }
 
-    }
+        public abstract void MouseScrollVertical(int value);
+	}
 }

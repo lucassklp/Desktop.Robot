@@ -120,4 +120,17 @@ extern "C" {
         sendCommandDown(input);
         sendCommandUp(input);
     }
+
+    void verticalScroll(int value){
+        CGEventSourceRef eventSource = CGEventSourceCreate(kCGEventSourceStateHIDSystemState);
+        CGEventRef scrollEvent = CGEventCreateScrollWheelEvent(eventSource,
+                                                              kCGScrollEventUnitPixel,
+                                                              1,
+                                                              value);
+
+        CGEventPost(kCGHIDEventTap, scrollEvent);
+
+        CFRelease(scrollEvent);
+        CFRelease(eventSource);
+    }
 }
