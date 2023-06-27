@@ -4,93 +4,93 @@ using System.Runtime.InteropServices;
 
 namespace Desktop.Robot.Windows
 {
-    public class Robot : AbstractRobot
-    {
-        public override Point GetMousePosition()
-        {
-            PointInter lpPoint;
-            GetCursorPos(out lpPoint);
-            return (Point)lpPoint;
-        }
+	public class Robot : AbstractRobot
+	{
+		public override Point GetMousePosition()
+		{
+			PointInter lpPoint;
+			GetCursorPos(out lpPoint);
+			return (Point)lpPoint;
+		}
 
-        public override void KeyDown(Key key)
-        {
-            ApplyAutoDelay();
-            var metadata = key.GetKeycode();
-            var keycode = (byte)metadata.Keycode;
-            var scancode = (byte)metadata.ScanCode;
-            keybd_event(keycode, scancode, 0, 0);
-        }
+		public override void KeyDown(Key key)
+		{
+			ApplyAutoDelay();
+			var metadata = key.GetKeycode();
+			var keycode = (byte)metadata.Keycode;
+			var scancode = (byte)metadata.ScanCode;
+			keybd_event(keycode, scancode, 0, 0);
+		}
 
-        public override void KeyDown(char key)
-        {
-            ApplyAutoDelay();
-            var keycode = (byte)VkKeyScan(key);
-            keybd_event(keycode, 0, 0, 0);
-        }
+		public override void KeyDown(char key)
+		{
+			ApplyAutoDelay();
+			var keycode = (byte)VkKeyScan(key);
+			keybd_event(keycode, 0, 0, 0);
+		}
 
-        public override void KeyPress(Key key)
-        {
-            ApplyAutoDelay();
-            var metadata = key.GetKeycode();
-            var keycode = (byte)metadata.Keycode;
-            var scancode = (byte)metadata.ScanCode;
-            keybd_event(keycode, scancode, 0, 0);
-            keybd_event(keycode, scancode, 2, 0);
-        }
+		public override void KeyPress(Key key)
+		{
+			ApplyAutoDelay();
+			var metadata = key.GetKeycode();
+			var keycode = (byte)metadata.Keycode;
+			var scancode = (byte)metadata.ScanCode;
+			keybd_event(keycode, scancode, 0, 0);
+			keybd_event(keycode, scancode, 2, 0);
+		}
 
-        public override void KeyPress(char key)
-        {
-            ApplyAutoDelay();
-            var keycode = (byte)VkKeyScan(key);
-            keybd_event(keycode, 0, 0, 0);
-            keybd_event(keycode, 0, 2, 0);
-        }
+		public override void KeyPress(char key)
+		{
+			ApplyAutoDelay();
+			var keycode = (byte)VkKeyScan(key);
+			keybd_event(keycode, 0, 0, 0);
+			keybd_event(keycode, 0, 2, 0);
+		}
 
-        public override void KeyUp(Key key)
-        {
-            ApplyAutoDelay();
-            var metadata = key.GetKeycode();
-            var keycode = (byte)metadata.Keycode;
-            var scancode = (byte)metadata.ScanCode;
-            keybd_event(keycode, scancode, 2, 0);
-        }
+		public override void KeyUp(Key key)
+		{
+			ApplyAutoDelay();
+			var metadata = key.GetKeycode();
+			var keycode = (byte)metadata.Keycode;
+			var scancode = (byte)metadata.ScanCode;
+			keybd_event(keycode, scancode, 2, 0);
+		}
 
-        public override void KeyUp(char key)
-        {
-            ApplyAutoDelay();
-            var keycode = (byte)VkKeyScan(key);
-            keybd_event(keycode, 0, 2, 0);
-        }
+		public override void KeyUp(char key)
+		{
+			ApplyAutoDelay();
+			var keycode = (byte)VkKeyScan(key);
+			keybd_event(keycode, 0, 2, 0);
+		}
 
-        public override void MouseMove(uint x, uint y)
-        {
-            ApplyAutoDelay();
-            SetCursorPos(x, y);
-        }
+		public override void MouseMove(uint x, uint y)
+		{
+			ApplyAutoDelay();
+			SetCursorPos(x, y);
+		}
 
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool SetCursorPos(uint x, uint y);
-
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct PointInter
-        {
-            public int X;
-            public int Y;
-            public static explicit operator Point(PointInter point) => new Point(point.X, point.Y);
-        }
-
-        [DllImport("user32.dll")]
-        public static extern bool GetCursorPos(out PointInter lpPoint);
+		[DllImport("user32.dll")]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		static extern bool SetCursorPos(uint x, uint y);
 
 
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+		[StructLayout(LayoutKind.Sequential)]
+		public struct PointInter
+		{
+			public int X;
+			public int Y;
+			public static explicit operator Point(PointInter point) => new Point(point.X, point.Y);
+		}
 
-        [DllImport("user32.dll")]
-        private static extern short VkKeyScan(char ch);
+		[DllImport("user32.dll")]
+		public static extern bool GetCursorPos(out PointInter lpPoint);
+
+
+		[DllImport("user32.dll", SetLastError = true)]
+		static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+
+		[DllImport("user32.dll")]
+		private static extern short VkKeyScan(char ch);
 
 		[DllImport("user32.dll", SetLastError = true)]
 		private static extern uint SendInput(uint inputCount, Input[] input, int size);
@@ -105,30 +105,30 @@ namespace Desktop.Robot.Windows
 		[StructLayout(LayoutKind.Sequential)]
 		public struct MouseInput
 		{
-			int dx;
-			int dy;
-			int mouseData;
-			MouseState dwFlags;
-			int time;
-			nint dwExtraInfo;
+			readonly int dx;
+			readonly int dy;
+			readonly int mouseData;
+			readonly MouseState dwFlags;
+			readonly int time;
+			readonly nint dwExtraInfo;
 			public MouseInput(MouseState dwFlags)
 			{
-                dx = 0;
-                dy = 0;
+				dx = 0;
+				dy = 0;
 				mouseData = 0;
 				this.dwFlags = dwFlags;
-                time = 0;
-                dwExtraInfo = 0;
+				time = 0;
+				dwExtraInfo = 0;
 			}
 
 			public MouseInput(int scroll, MouseState dwFlags)
 			{
 				dx = 0;
-                dy = 0;
+				dy = 0;
 				mouseData = scroll;
 				this.dwFlags = dwFlags;
-                time = 0;
-                dwExtraInfo = 0;
+				time = 0;
+				dwExtraInfo = 0;
 			}
 		}
 
@@ -156,14 +156,19 @@ namespace Desktop.Robot.Windows
 
 		public override void MouseScrollVertical(int value)
 		{
-			var input = new Input
-			{
-				Type = InputType.Mouse,
-				MouseInputWithUnion = new MouseInput(value, MouseState.MouseWheelUpDown)
+			var input = new Input[]
+			{ 
+				new Input
+				{
+					Type = InputType.Mouse,
+					MouseInputWithUnion = new MouseInput(value, MouseState.MouseWheelUpDown)
+				}
 			};
-            var responce = SendInput(1, new Input[] { input }, Marshal.SizeOf(input));
+			var responce = SendInput(1, input, Marshal.SizeOf(input));
 			if (responce == 0)
+			{
 				throw new Exception();
+			}
 		}
 	}
 }
