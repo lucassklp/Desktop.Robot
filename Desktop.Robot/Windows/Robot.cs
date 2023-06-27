@@ -171,7 +171,7 @@ namespace Desktop.Robot.Windows
 
 		public override void MouseScrollVertical(int value)
 		{
-			var input = new Input[]
+			var input = new[]
 			{
 				new Input
 				{
