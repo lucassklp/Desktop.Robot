@@ -23,11 +23,13 @@ namespace Desktop.Robot
 
         public abstract void KeyUp(char key);
 
-        public abstract void MouseMove(uint x, uint y);
+        public abstract void MouseMove(int x, int y);
+
+        public abstract void MouseScrollVertical(int value);
 
         public void MouseMove(Point p) 
         {
-            MouseMove((uint)p.X, (uint)p.Y);
+            MouseMove(p.X, p.Y);
         }
 
         public virtual Image CreateScreenCapture(Rectangle screenRect)
@@ -38,7 +40,7 @@ namespace Desktop.Robot
             return bmp;
         }
 
-        public virtual Color GetPixelColor(uint x, uint y)
+        public virtual Color GetPixelColor(int x, int y)
         {
             var rect = new Rectangle(new Point((int)x, (int)y), new Size(1, 1));
             return (CreateScreenCapture(rect) as Bitmap).GetPixel(0, 0);
@@ -74,7 +76,5 @@ namespace Desktop.Robot
                 Thread.Sleep((int)AutoDelay);
             }
         }
-
-        public abstract void MouseScrollVertical(int value);
 	}
 }

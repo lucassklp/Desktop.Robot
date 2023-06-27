@@ -46,7 +46,7 @@ namespace Desktop.Robot.OSX
             keyUp(key);
         }
 
-        public override void MouseMove(uint x, uint y)
+        public override void MouseMove(int x, int y)
         {
             ApplyAutoDelay();
             setMousePosition(x, y);
@@ -73,7 +73,7 @@ namespace Desktop.Robot.OSX
 		}
 
 		[DllImport("./osx.os", EntryPoint = "setMousePosition")]
-        private static extern void setMousePosition(uint x, uint y);
+        private static extern void setMousePosition(int x, int y);
 
         [DllImport("./osx.os", EntryPoint = "getMousePosition")]
         private static extern IntPtr getMousePosition();

@@ -29,7 +29,7 @@ namespace Desktop.Robot.Linux
         public override void KeyDown(char key)
         {
             ApplyAutoDelay();
-            var flags = Char.IsUpper(key) ? (1 << 0) : 0;
+            var flags = char.IsUpper(key) ? (1 << 0) : 0;
             pressKey(key, true, flags);
         }
 
@@ -44,7 +44,7 @@ namespace Desktop.Robot.Linux
         public override void KeyPress(char key)
         {
             ApplyAutoDelay();
-            var flags = Char.IsUpper(key) ? (1 << 0) : 0;
+            var flags = char.IsUpper(key) ? (1 << 0) : 0;
             pressKey(key, true, flags);
             pressKey(key, false, flags);
         }
@@ -59,13 +59,30 @@ namespace Desktop.Robot.Linux
         public override void KeyUp(char key)
         {
             ApplyAutoDelay();
-            var flags = Char.IsUpper(key) ? (1 << 0) : 0;
+            var flags = char.IsUpper(key) ? (1 << 0) : 0;
             pressKey(key, false, flags);
         }
-        public override void MouseMove(uint x, uint y)
+
+        public override void MouseMove(int x, int y)
         {
             ApplyAutoDelay();
-            moveMouse((int)x, (int)y);
+            moveMouse(x, y);
+        }
+
+        public override void MouseScrollVertical(int value)
+        {
+            if (value < 0)
+            {
+                click(true, Common.UP_BUTTON);
+                Thread.Sleep(value);
+                click(false, Common.UP_BUTTON);
+            }
+            else
+            {
+                click(true, Common.DOWN_BUTTON);
+                Thread.Sleep(value);
+                click(false, Common.DOWN_BUTTON);
+            }
         }
 
 
@@ -86,21 +103,5 @@ namespace Desktop.Robot.Linux
 
         [DllImport("./x11.os", EntryPoint = "pressKeyCode")]
         private static extern IntPtr pressKeyCode(int code, bool down, int flags);
-
-		public override void MouseScrollVertical(int value)
-		{
-            if (value < 0)
-            {
-                click(true, Common.UP_BUTTON);
-                Thread.Sleep(value);
-                click(false, Common.UP_BUTTON);
-            }
-            else
-			{
-				click(true, Common.DOWN_BUTTON);
-				Thread.Sleep(value);
-				click(false, Common.DOWN_BUTTON);
-			}
-		}
 	}
 }
