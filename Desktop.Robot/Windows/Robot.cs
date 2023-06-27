@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -96,14 +97,21 @@ namespace Desktop.Robot.Windows
 		private static extern uint SendInput(uint inputCount, Input[] input, int size);
 
 		[StructLayout(LayoutKind.Sequential)]
-		private struct Input
+		private struct Input : IEquatable<Input>
 		{
 			public InputType Type { get; set; }
 			public MouseInput MouseInputWithUnion { get; set; }
+
+			public bool Equals(Input other)
+			{
+				return this.Type == other.Type 
+					? this.MouseInputWithUnion.Equals(other.MouseInputWithUnion)
+					: false;
+			}
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
-		public struct MouseInput
+		public struct MouseInput : IEquatable<MouseInput>
 		{
 			readonly int dx;
 			readonly int dy;
@@ -129,6 +137,13 @@ namespace Desktop.Robot.Windows
 				this.dwFlags = dwFlags;
 				time = 0;
 				dwExtraInfo = 0;
+			}
+
+			public bool Equals(MouseInput other)
+			{
+				return this.dwFlags == other.dwFlags
+					? this.mouseData == other.mouseData
+					: false;
 			}
 		}
 
@@ -156,8 +171,8 @@ namespace Desktop.Robot.Windows
 
 		public override void MouseScrollVertical(int value)
 		{
-			var input = new Input[]
-			{ 
+			var input = new Input[1]
+			{
 				new Input
 				{
 					Type = InputType.Mouse,
@@ -165,10 +180,7 @@ namespace Desktop.Robot.Windows
 				}
 			};
 			var responce = SendInput(1, input, Marshal.SizeOf(input));
-			if (responce == 0)
-			{
-				throw new Exception();
-			}
+			Debug.Assert(responce == 0);
 		}
 	}
 }
