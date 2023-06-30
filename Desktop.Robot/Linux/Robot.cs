@@ -88,7 +88,7 @@ namespace Desktop.Robot.Linux
                     value--;
                 }
             }
-            while (value == 0);
+            while (value != 0);
         }
 
 
