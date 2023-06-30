@@ -71,18 +71,21 @@ namespace Desktop.Robot.Linux
 
         public override void MouseScrollVertical(int value)
         {
-            if (value < 0)
+            while (value > 0)
             {
-                click(true, Common.UP_BUTTON);
-                Thread.Sleep(value);
-                click(false, Common.UP_BUTTON);
-            }
-            else
-            {
-                click(true, Common.DOWN_BUTTON);
-                Thread.Sleep(value);
-                click(false, Common.DOWN_BUTTON);
-            }
+				if (value < 0)
+				{
+					click(true, Common.UP_BUTTON);
+					Thread.Sleep(100);
+					click(false, Common.UP_BUTTON);
+				}
+				else
+				{
+					click(true, Common.DOWN_BUTTON);
+					Thread.Sleep(100);
+					click(false, Common.DOWN_BUTTON);
+				}
+			}
         }
 
 
