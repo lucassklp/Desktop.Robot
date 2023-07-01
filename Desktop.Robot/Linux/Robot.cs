@@ -74,7 +74,7 @@ namespace Desktop.Robot.Linux
             if (value < 0)
             {
                 click(true, Common.UP_BUTTON);
-                Thread.Sleep(value);
+                Thread.Sleep(-value);
                 click(false, Common.UP_BUTTON);
             }
             else

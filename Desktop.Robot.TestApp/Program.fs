@@ -58,6 +58,8 @@ type MainWindow() as this =
             .Subscribe(fun _ -> runTests())
             |> ignore
 
+        this.PointerWheelChanged.ObserveOn(SynchronizationContext.Current).Subscribe(fun x -> printfn "Wheel %f ... %A" x.Delta.Y x) |> ignore
+
 type App() =
     inherit Application()
 
