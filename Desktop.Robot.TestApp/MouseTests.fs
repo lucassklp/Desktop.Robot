@@ -110,6 +110,21 @@ let tests (window:Window) = testList "Mouse tests" [
     testMouseDownUp RightButton
     testMouseDownUp MiddleButton
 
+    uiTest "Can scroll vertical" <| async {
+        let wheelDeltas = window.PointerWheelChanged.Select(fun x -> x.Delta)
+
+        let! deltaEvents = attemptUIActionList wheelDeltas <| async {
+            Robot().MouseScrollVertical(100) // scroll down
+            Robot().MouseScrollVertical(-100) // then scroll up
+        }
+        Expect.hasLength deltaEvents 2 "Should have a wheel event for each mouse scroll"
+        let xDeltas = deltaEvents |> List.map (fun p -> p.X)
+        let yDeltas = deltaEvents |> List.map (fun p -> p.Y)
+        Expect.allEqual xDeltas 0 "Should not scroll horizontally"
+        Expect.isLessThan yDeltas[0] 0 "Should scroll down first"
+        Expect.isGreaterThan yDeltas[1] 0 "Should scroll up next"
+    }
+
     uiTest "Can move to point" <| async {
         let toPixelPoint (p:Point) = PixelPoint(int p.X, int p.Y)
         let toDrawingPoint (p:PixelPoint) = Drawing.Point(p.X, p.Y)
