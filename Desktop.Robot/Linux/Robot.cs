@@ -69,21 +69,42 @@ namespace Desktop.Robot.Linux
             moveMouse(x, y);
         }
 
-        public override void MouseScrollVertical(int value)
+
+        public override void MouseScroll(int value)
+        {
+            ApplyAutoDelay();
+            DoMouseScroll(value, 100);
+        }
+
+        public override void MouseScroll(int value, int duration)
+        {
+            MouseScroll(value, duration, 100);
+        }
+
+        public override void MouseScroll(int value, int duration, int steps)
+        {
+            ApplyAutoDelay();
+            for (int i = 0; i < steps; i++)
+            {
+                DoMouseScroll(value / steps, duration / steps);
+            }
+        }
+
+        private void DoMouseScroll(int value, int duration)
         {
             do
             {
                 if (value < 0)
                 {
                     click(true, Common.UP_BUTTON);
-                    Thread.Sleep(100);
+                    Thread.Sleep(duration);
                     click(false, Common.UP_BUTTON);
                     value++;
                 }
                 else
                 {
                     click(true, Common.DOWN_BUTTON);
-                    Thread.Sleep(100);
+                    Thread.Sleep(duration);
                     click(false, Common.DOWN_BUTTON);
                     value--;
                 }

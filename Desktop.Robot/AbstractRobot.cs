@@ -25,7 +25,11 @@ namespace Desktop.Robot
 
         public abstract void MouseMove(int x, int y);
 
-        public abstract void MouseScrollVertical(int value);
+        public abstract void MouseScroll(int value);
+
+        public abstract void MouseScroll(int value, int duration);
+
+        public abstract void MouseScroll(int value, int duration, int steps);
 
         public void MouseMove(Point p) 
         {
@@ -71,10 +75,7 @@ namespace Desktop.Robot
 
         protected void ApplyAutoDelay()
         {
-            if (AutoDelay > 0)
-            {
-                Thread.Sleep((int)AutoDelay);
-            }
+            Thread.Sleep((int)AutoDelay);    
         }
-	}
+    }
 }

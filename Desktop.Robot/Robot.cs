@@ -102,12 +102,22 @@ namespace Desktop.Robot
             robot.MouseMove(p);
         }
 
-		public void MouseScrollVertical(int value)
+		public void MouseScroll(int value)
 		{
-            robot.MouseScrollVertical(value);
+            robot.MouseScroll(-1 * value);
 		}
 
-		public void MouseUp(IClick click)
+        public void MouseScroll(int value, int duration)
+        {
+            robot.MouseScroll(-1 * value, duration);
+        }
+
+        public void MouseScroll(int value, int duration, int steps)
+        {
+            robot.MouseScroll(-1 * value, duration, steps); 
+        }
+
+        public void MouseUp(IClick click)
         {
             robot.MouseUp(click);
         }

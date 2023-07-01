@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Desktop.Robot.Windows
 {
@@ -70,7 +72,43 @@ namespace Desktop.Robot.Windows
 			SetCursorPos(x, y);
 		}
 
-		[DllImport("user32.dll")]
+        public override void MouseScroll(int value)
+        {
+            ApplyAutoDelay();
+			DoMouseScroll(value * 100);
+        }
+
+        public override void MouseScroll(int value, int duration)
+        {
+			MouseScroll(value, duration, 10);
+        }
+
+        public override void MouseScroll(int value, int duration, int steps)
+        {
+            ApplyAutoDelay();
+            for (int i = 0; i < steps; i++)
+            {
+                Thread.Sleep(duration / steps);
+				DoMouseScroll(value * 100 / steps);
+            }
+        }
+
+        private void DoMouseScroll(int value)
+		{
+            var inputs = new List<Input>();
+
+            var input = new Input()
+            {
+                Type = InputType.Mouse,
+                MouseInputWithUnion = new MouseInput(value / 10, MouseState.MouseWheelUpDown)
+            };
+
+            inputs.Add(input);
+
+            SendInput(1, inputs.ToArray(), Marshal.SizeOf(inputs[0]) * inputs.Count);
+        }
+
+        [DllImport("user32.dll")]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		static extern bool SetCursorPos(int x, int y);
 
@@ -139,7 +177,18 @@ namespace Desktop.Robot.Windows
 				dwExtraInfo = 0;
 			}
 
-			public bool Equals(MouseInput other)
+			public MouseInput(int scroll, MouseState dwFlags, int duration)
+			{
+				dx = 0;
+				dy = 0;
+				mouseData = scroll;
+				this.dwFlags = dwFlags;
+				time = duration;
+				dwExtraInfo = 0;
+			}
+
+
+        public bool Equals(MouseInput other)
 			{
 				return this.dwFlags == other.dwFlags
 					? this.mouseData == other.mouseData
@@ -167,20 +216,6 @@ namespace Desktop.Robot.Windows
 			Mouse = 0,
 			Keyboard = 1,
 			Hardware = 3
-		}
-
-		public override void MouseScrollVertical(int value)
-		{
-			var inputs = new[]
-			{
-				new Input
-				{
-					Type = InputType.Mouse,
-					MouseInputWithUnion = new MouseInput(value, MouseState.MouseWheelUpDown)
-				}
-			};
-			var response = SendInput(1, inputs, Marshal.SizeOf(inputs[0]));
-			Debug.Assert(response == 0);
 		}
 	}
 }

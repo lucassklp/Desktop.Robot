@@ -20,7 +20,9 @@ namespace Desktop.Robot
         void Delay(uint ms);
         void MouseMove(int x, int y);
         void MouseMove(Point p);
-        void MouseScrollVertical(int value);
+        void MouseScroll(int value);
+        void MouseScroll(int value, int duration);
+        void MouseScroll(int value, int duration, int steps);
         Point GetMousePosition();
     }
 }
