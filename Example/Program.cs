@@ -13,20 +13,22 @@ namespace Example
         static void Main(string[] args)
         {
             var robot = new Robot();
-            //robot.OnMouseMove().Subscribe(position => Console.WriteLine(position));
+            robot.OnMouseMove().Subscribe(position => Console.WriteLine(position));
             robot.AutoDelay = 1000;
-            //robot.MouseMove(700, 500);
-            //robot.BezierMovement(new Point(0, 0), TimeSpan.FromMilliseconds(1000));
-            //robot.Click();
-            //robot.Type("A invisible cat is using my PC", 125);
-            //robot.CombineKeys(Key.Alt, Key.Tab);
+            robot.MouseMove(700, 500);
+            robot.BezierMovement(new Point(0, 0), TimeSpan.FromMilliseconds(1000));
+            robot.Click();
+            robot.Type("A invisible cat is using my PC", 125);
+            robot.CombineKeys(Key.Alt, Key.Tab);
 
-            //using var screenshot = robot.CreateScreenCapture(new Rectangle(100, 100, 200, 200));
-            //var path = Path.Combine(Directory.GetCurrentDirectory(), $"image-{Guid.NewGuid()}.bmp");
-            //screenshot.Save(path, ImageFormat.Bmp);
+            // Code available only on Windows. Need improvement.
+            using var screenshot = robot.CreateScreenCapture(new Rectangle(100, 100, 200, 200));
+            var path = Path.Combine(Directory.GetCurrentDirectory(), $"image-{Guid.NewGuid()}.bmp");
+            screenshot.Save(path, ImageFormat.Bmp);
+
             robot.LinearMovement(300, 300);
             robot.Click();
-            robot.MouseScroll(1000, 5000, 500);
+            robot.MouseScroll(value: -1000, duration: TimeSpan.FromSeconds(5), steps: 500);
         }
     }
 }

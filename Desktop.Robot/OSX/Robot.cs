@@ -74,12 +74,12 @@ namespace Desktop.Robot.OSX
             DoMouseScroll(value);
         }
 
-        public override void MouseScroll(int value, int duration)
+        public override void MouseScroll(int value, TimeSpan duration)
         {
             MouseScroll(value, duration, 50);
         }
 
-        public override void MouseScroll(int value, int duration, int steps)
+        public override void MouseScroll(int value, TimeSpan duration, int steps)
         {
             ApplyAutoDelay();
             for (int i = 0; i < steps; i++)

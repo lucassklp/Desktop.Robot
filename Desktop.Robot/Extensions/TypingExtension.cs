@@ -14,9 +14,9 @@ namespace Desktop.Robot.Extensions
             return robot;
         }
 
-        public static IRobot Type(this IRobot robot, string text, uint delay)
+        public static IRobot Type(this IRobot robot, string text, int delay)
         {
-            Thread.Sleep((int)robot.AutoDelay);
+            Thread.Sleep(robot.AutoDelay);
             var currentDelay = robot.AutoDelay;
             robot.AutoDelay = delay;
             foreach (var ch in text)

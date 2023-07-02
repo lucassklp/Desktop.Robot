@@ -1,4 +1,5 @@
 ﻿using Desktop.Robot.Clicks;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
@@ -7,7 +8,7 @@ namespace Desktop.Robot
 {
     public abstract class AbstractRobot : IRobot
     {
-        public uint AutoDelay { get; set; }
+        public int AutoDelay { get; set; }
 
         public abstract Point GetMousePosition();
 
@@ -27,9 +28,9 @@ namespace Desktop.Robot
 
         public abstract void MouseScroll(int value);
 
-        public abstract void MouseScroll(int value, int duration);
+        public abstract void MouseScroll(int value, TimeSpan duration);
 
-        public abstract void MouseScroll(int value, int duration, int steps);
+        public abstract void MouseScroll(int value, TimeSpan duration, int steps);
 
         public void MouseMove(Point p) 
         {
@@ -68,14 +69,14 @@ namespace Desktop.Robot
             click.ExecuteMouseUp(new MouseContext(GetMousePosition()));
         }
 
-        public void Delay(uint ms)
+        public void Delay(int ms)
         {
-            Thread.Sleep((int)ms);
+            Thread.Sleep(ms);
         }
 
         protected void ApplyAutoDelay()
         {
-            Thread.Sleep((int)AutoDelay);    
+            Thread.Sleep(AutoDelay);    
         }
     }
 }

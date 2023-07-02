@@ -76,17 +76,17 @@ namespace Desktop.Robot.Linux
             DoMouseScroll(value, 100);
         }
 
-        public override void MouseScroll(int value, int duration)
+        public override void MouseScroll(int value, TimeSpan duration)
         {
             MouseScroll(value, duration, 100);
         }
 
-        public override void MouseScroll(int value, int duration, int steps)
+        public override void MouseScroll(int value, TimeSpan duration, int steps)
         {
             ApplyAutoDelay();
             for (int i = 0; i < steps; i++)
             {
-                DoMouseScroll(value / steps, duration / steps);
+                DoMouseScroll(value / steps, Convert.ToInt32(duration.TotalMilliseconds) / steps);
             }
         }
 

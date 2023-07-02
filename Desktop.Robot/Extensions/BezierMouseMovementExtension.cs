@@ -46,13 +46,13 @@ namespace Desktop.Robot.Extensions
                 points.Add(GetPoint(t, initial, controlPoint, ending));
             }
 
-            var interval = duration.TotalMilliseconds / points.Count;
+            var interval = Convert.ToInt32(duration.TotalMilliseconds / points.Count);
 
             robot.MouseMove(initial);
 
             //Avoiding AutoDelay
             var currentAutoDelay = robot.AutoDelay;
-            robot.AutoDelay = (uint)interval;
+            robot.AutoDelay = interval;
 
             foreach (var point in points)
             {
