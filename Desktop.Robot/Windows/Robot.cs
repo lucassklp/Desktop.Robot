@@ -95,17 +95,16 @@ namespace Desktop.Robot.Windows
 
         private void DoMouseScroll(int value)
 		{
-            var inputs = new List<Input>();
+			var inputs = new[]
+			{
+				new Input
+				{
+					Type = InputType.Mouse,
+					MouseInputWithUnion = new MouseInput(value / 10, MouseState.MouseWheelUpDown)
+				}
+			};
 
-            var input = new Input()
-            {
-                Type = InputType.Mouse,
-                MouseInputWithUnion = new MouseInput(value / 10, MouseState.MouseWheelUpDown)
-            };
-
-            inputs.Add(input);
-
-            SendInput(1, inputs.ToArray(), Marshal.SizeOf(inputs[0]) * inputs.Count);
+            SendInput(1, inputs, Marshal.SizeOf(inputs[0]));
         }
 
         [DllImport("user32.dll")]
