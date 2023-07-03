@@ -1,5 +1,4 @@
-﻿using System;
-namespace Desktop.Robot.Clicks.Linux
+﻿namespace Desktop.Robot.Clicks.Linux
 {
     internal record MiddleClick(int delay) : IClick
     {

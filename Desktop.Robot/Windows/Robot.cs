@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace Desktop.Robot.Windows
 {
-	public class Robot : AbstractRobot
+    public class Robot : AbstractRobot
 	{
 		public override Point GetMousePosition()
 		{
@@ -97,7 +95,7 @@ namespace Desktop.Robot.Windows
 		{
 			var inputs = new[]
 			{
-			new Input
+				new Input
 				{
 					Type = InputType.Mouse,
 					MouseInputWithUnion = new MouseInput(value / 10, MouseState.MouseWheelUpDown)
