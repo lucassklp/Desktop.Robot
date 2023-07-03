@@ -104,7 +104,7 @@ namespace Desktop.Robot.Windows
 				}
 			};
 
-            SendInput(1, inputs, Marshal.SizeOf(inputs[0]));
+			SendInput(1, inputs, Marshal.SizeOf(inputs[0]));
         }
 
         [DllImport("user32.dll")]
