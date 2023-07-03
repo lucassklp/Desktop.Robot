@@ -107,7 +107,7 @@ namespace Desktop.Robot.Windows
 			SendInput(1, inputs, Marshal.SizeOf(inputs[0]));
         }
 
-        [DllImport("user32.dll")]
+		[DllImport("user32.dll")]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		static extern bool SetCursorPos(int x, int y);
 
