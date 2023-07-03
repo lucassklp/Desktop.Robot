@@ -96,16 +96,16 @@ namespace Desktop.Robot.Linux
             {
                 if (value < 0)
                 {
-                    click(true, Common.UP_BUTTON);
+                    click(true, Common.DOWN_BUTTON);
                     Thread.Sleep(duration);
-                    click(false, Common.UP_BUTTON);
+                    click(false, Common.DOWN_BUTTON);
                     value++;
                 }
                 else
                 {
-                    click(true, Common.DOWN_BUTTON);
+                    click(true, Common.UP_BUTTON);
                     Thread.Sleep(duration);
-                    click(false, Common.DOWN_BUTTON);
+                    click(false, Common.UP_BUTTON);
                     value--;
                 }
             }
