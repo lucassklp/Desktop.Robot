@@ -20,10 +20,15 @@ namespace Example
             robot.Click();
             robot.Type("A invisible cat is using my PC", 125);
             robot.CombineKeys(Key.Alt, Key.Tab);
-            
+
+            // Code available only on Windows. Need improvement.
             using var screenshot = robot.CreateScreenCapture(new Rectangle(100, 100, 200, 200));
             var path = Path.Combine(Directory.GetCurrentDirectory(), $"image-{Guid.NewGuid()}.bmp");
             screenshot.Save(path, ImageFormat.Bmp);
+
+            robot.LinearMovement(300, 300);
+            robot.Click();
+            robot.MouseScroll(value: -1000, duration: TimeSpan.FromSeconds(5), steps: 500);
         }
     }
 }

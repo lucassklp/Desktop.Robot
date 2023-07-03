@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Desktop.Robot.Windows
 {
-	public class Robot : AbstractRobot
+    public class Robot : AbstractRobot
 	{
 		public override Point GetMousePosition()
 		{
@@ -68,6 +68,41 @@ namespace Desktop.Robot.Windows
 		{
 			ApplyAutoDelay();
 			SetCursorPos(x, y);
+		}
+
+        public override void MouseScroll(int value)
+        {
+            ApplyAutoDelay();
+			DoMouseScroll(value * 100);
+        }
+
+        public override void MouseScroll(int value, TimeSpan duration)
+        {
+			MouseScroll(value, duration, 10);
+        }
+
+        public override void MouseScroll(int value, TimeSpan duration, int steps)
+        {
+            ApplyAutoDelay();
+            for (int i = 0; i < steps; i++)
+            {
+                Thread.Sleep(duration / steps);
+				DoMouseScroll(value * 100 / steps);
+            }
+        }
+
+		private void DoMouseScroll(int value)
+		{
+			var inputs = new[]
+			{
+				new Input
+				{
+					Type = InputType.Mouse,
+					MouseInputWithUnion = new MouseInput(value / 10, MouseState.MouseWheelUpDown)
+				}
+			};
+
+			SendInput(1, inputs, Marshal.SizeOf(inputs[0]));
 		}
 
 		[DllImport("user32.dll")]
@@ -139,6 +174,7 @@ namespace Desktop.Robot.Windows
 				dwExtraInfo = 0;
 			}
 
+
 			public bool Equals(MouseInput other)
 			{
 				return this.dwFlags == other.dwFlags
@@ -167,20 +203,6 @@ namespace Desktop.Robot.Windows
 			Mouse = 0,
 			Keyboard = 1,
 			Hardware = 3
-		}
-
-		public override void MouseScrollVertical(int value)
-		{
-			var inputs = new[]
-			{
-				new Input
-				{
-					Type = InputType.Mouse,
-					MouseInputWithUnion = new MouseInput(value, MouseState.MouseWheelUpDown)
-				}
-			};
-			var response = SendInput(1, inputs, Marshal.SizeOf(inputs[0]));
-			Debug.Assert(response == 0);
 		}
 	}
 }

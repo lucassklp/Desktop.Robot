@@ -29,7 +29,7 @@ namespace Desktop.Robot
             }
         }
 
-        public uint AutoDelay { get => robot.AutoDelay; set => robot.AutoDelay = value; }
+        public int AutoDelay { get => robot.AutoDelay; set => robot.AutoDelay = value; }
 
         public void Click(IClick click)
         {
@@ -41,7 +41,7 @@ namespace Desktop.Robot
             return robot.CreateScreenCapture(screenRect);
         }
 
-        public void Delay(uint ms)
+        public void Delay(int ms)
         {
             robot.Delay(ms);
         }
@@ -102,12 +102,22 @@ namespace Desktop.Robot
             robot.MouseMove(p);
         }
 
-		public void MouseScrollVertical(int value)
-		{
-            robot.MouseScrollVertical(value);
-		}
+        public void MouseScroll(int value)
+        {
+            robot.MouseScroll(-1 * value);
+        }
 
-		public void MouseUp(IClick click)
+        public void MouseScroll(int value, TimeSpan duration)
+        {
+            robot.MouseScroll(-1 * value, duration);
+        }
+
+        public void MouseScroll(int value, TimeSpan duration, int steps)
+        {
+            robot.MouseScroll(-1 * value, duration, steps); 
+        }
+
+        public void MouseUp(IClick click)
         {
             robot.MouseUp(click);
         }

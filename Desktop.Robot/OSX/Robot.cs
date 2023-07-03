@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Desktop.Robot.OSX
 {
@@ -67,12 +68,33 @@ namespace Desktop.Robot.OSX
             return new Point(coords[0], screenRes[1] - coords[1]);
         }
 
-		public override void MouseScrollVertical(int value)
-		{
-			verticalScroll(value);
-		}
+        public override void MouseScroll(int value)
+        {
+            ApplyAutoDelay();
+            DoMouseScroll(value);
+        }
 
-		[DllImport("./osx.os", EntryPoint = "setMousePosition")]
+        public override void MouseScroll(int value, TimeSpan duration)
+        {
+            MouseScroll(value, duration, 50);
+        }
+
+        public override void MouseScroll(int value, TimeSpan duration, int steps)
+        {
+            ApplyAutoDelay();
+            for (int i = 0; i < steps; i++)
+            {
+                Thread.Sleep(duration / steps);
+                DoMouseScroll(value / steps);
+            }
+        }
+        private void DoMouseScroll(int value)
+        {
+            verticalScroll(value);
+        }
+
+
+        [DllImport("./osx.os", EntryPoint = "setMousePosition")]
         private static extern void setMousePosition(int x, int y);
 
         [DllImport("./osx.os", EntryPoint = "getMousePosition")]
