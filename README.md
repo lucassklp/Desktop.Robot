@@ -20,13 +20,13 @@ I made this library because the dotnet SDK doesn't support simulation of mouse a
 If you are using Package Manager:
 
 ```bash
-Install-Package Desktop.Robot -Version 1.4.0
+Install-Package Desktop.Robot -Version 1.4.1
 ```
 
 If you are using .NET CLI
 
 ```bash
-dotnet add package Desktop.Robot --version 1.4.0
+dotnet add package Desktop.Robot --version 1.4.1
 ```
 
 

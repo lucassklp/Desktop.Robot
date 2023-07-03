@@ -176,18 +176,8 @@ namespace Desktop.Robot.Windows
 				dwExtraInfo = 0;
 			}
 
-			public MouseInput(int scroll, MouseState dwFlags, int duration)
-			{
-				dx = 0;
-				dy = 0;
-				mouseData = scroll;
-				this.dwFlags = dwFlags;
-				time = duration;
-				dwExtraInfo = 0;
-			}
 
-
-        public bool Equals(MouseInput other)
+			public bool Equals(MouseInput other)
 			{
 				return this.dwFlags == other.dwFlags
 					? this.mouseData == other.mouseData
