@@ -93,11 +93,11 @@ namespace Desktop.Robot.Windows
             }
         }
 
-        private void DoMouseScroll(int value)
+		private void DoMouseScroll(int value)
 		{
 			var inputs = new[]
 			{
-				new Input
+			new Input
 				{
 					Type = InputType.Mouse,
 					MouseInputWithUnion = new MouseInput(value / 10, MouseState.MouseWheelUpDown)
@@ -105,7 +105,7 @@ namespace Desktop.Robot.Windows
 			};
 
 			SendInput(1, inputs, Marshal.SizeOf(inputs[0]));
-        }
+		}
 
 		[DllImport("user32.dll")]
 		[return: MarshalAs(UnmanagedType.Bool)]

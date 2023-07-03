@@ -102,10 +102,10 @@ namespace Desktop.Robot
             robot.MouseMove(p);
         }
 
-		public void MouseScroll(int value)
-		{
+        public void MouseScroll(int value)
+        {
             robot.MouseScroll(-1 * value);
-		}
+        }
 
         public void MouseScroll(int value, TimeSpan duration)
         {

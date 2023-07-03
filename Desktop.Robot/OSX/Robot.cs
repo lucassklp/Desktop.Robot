@@ -89,12 +89,12 @@ namespace Desktop.Robot.OSX
             }
         }
         private void DoMouseScroll(int value)
-		{
-			verticalScroll(value);
-		}
+        {
+            verticalScroll(value);
+        }
 
 
-		[DllImport("./osx.os", EntryPoint = "setMousePosition")]
+        [DllImport("./osx.os", EntryPoint = "setMousePosition")]
         private static extern void setMousePosition(int x, int y);
 
         [DllImport("./osx.os", EntryPoint = "getMousePosition")]
