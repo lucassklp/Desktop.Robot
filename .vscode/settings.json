@@ -43,5 +43,6 @@
         "sstream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp"
-    }
+    },
+    "dotnet.defaultSolution": "Desktop.Robot.sln"
 }
