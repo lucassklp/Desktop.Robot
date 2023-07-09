@@ -5,6 +5,10 @@
       <Link>osx.os</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)osx_arm.os">
+      <Link>osx_arm.os</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="$(MSBuildThisFileDirectory)x11.os">
       <Link>x11.os</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
