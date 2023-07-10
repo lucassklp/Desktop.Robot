@@ -13,7 +13,8 @@ namespace Desktop.Robot
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                robot = new OSX.Robot();
+                robot = RuntimeInformation.ProcessArchitecture == Architecture.Arm64 ? 
+                    new OSX.Arm.Robot() : new OSX.Intel.Robot();
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
