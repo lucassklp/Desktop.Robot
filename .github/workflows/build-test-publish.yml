@@ -28,7 +28,7 @@ jobs:
     - name: Pack
       run: |  
           cd Desktop.Robot
-          dotnet pack -c Release -o out  
+          dotnet pack -c Release -o out
 
     - name: Push Desktop.Robot to GitHub registry
       run: |
@@ -36,7 +36,5 @@ jobs:
         dotnet nuget push ./Desktop.Robot/out/*.nupkg --skip-duplicate
 
     - name: Publish Desktop.Robot to nuget.org
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-          PROJECT_FILE_PATH: Desktop.Robot/Desktop.Robot.csproj
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+      run: |
+        dotnet nuget push ./Desktop.Robot/out/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
