@@ -225,7 +225,7 @@ namespace Desktop.Robot
         Dollar,
 
         [Keycode(Platform = "OSX", Keycode = 0x2C)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0xBF)]
         [Keycode(Platform = "Linux", Keycode = 0x002f)]
         Slash,
 
@@ -255,7 +255,7 @@ namespace Desktop.Robot
         GreaterThan,
 
         [Keycode(Platform = "OSX", Keycode = 0x27)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0xDE)]
         [Keycode(Platform = "Linux", Keycode = 0x0022)]
         QuotationMark,
 
@@ -270,12 +270,12 @@ namespace Desktop.Robot
         CloseParenthesis,
 
         [Keycode(Platform = "OSX", Keycode = 0x21)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0xDB)]
         [Keycode(Platform = "Linux", Keycode = 0x005b)]
         OpenBracket,
 
         [Keycode(Platform = "OSX", Keycode = 0x1E)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0xDD)]
         [Keycode(Platform = "Linux", Keycode = 0x005d)]
         CloseBracket,
 

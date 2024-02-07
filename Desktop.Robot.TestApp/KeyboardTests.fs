@@ -177,6 +177,12 @@ let tests (window:Window) = testList "Keybard tests" [
             do! testBody tb
         }
 
+    let textboxTest name expectedMessage robotAction = keyboardTest name <| fun tb -> async {
+        do! robotDoOnThreadpool <| async { do robotAction (Robot()) }
+        do! pressKeyAndWaitForEvent tb Key.Esc
+        Expect.equal tb.Text expectedMessage "Should get expected key"
+    }
+
     keyboardTest "Simple keypess" <| fun tb -> async {
         do! pressKeyAndWaitForEvent tb Key.A
         Expect.equal tb.Text "a" "Should press A"
@@ -205,7 +211,15 @@ let tests (window:Window) = testList "Keybard tests" [
 
         testList "Alphabet keys" (List.map regularKeyTest alphabetKeys)
         testList "Digit keys" (List.map regularKeyTest digitKeys)
-        // Dodo: Test more testable sets of keycodes
+
+        testList "Some misc keys" [
+            textboxTest "Single quotation mark" "'" (fun rb -> rb.KeyPress(Key.QuotationMark))
+            textboxTest "Double quotation mark with shift" "\"" (fun rb -> ignore <| rb.CombineKeys(Key.Shift, Key.QuotationMark))
+            textboxTest "Brackets" "[]" (fun rb -> ignore <| rb.KeyPress(Key.OpenBracket); rb.KeyPress(Key.CloseBracket))
+            textboxTest "Forward slash" "/" (fun rb -> rb.KeyPress(Key.Slash))
+            textboxTest "Question mark" "?"(fun rb -> ignore <| rb.CombineKeys(Key.Shift, Key.Slash))
+        ]
+        // Todo: Test more testable sets of keycodes
 
         // don't test all keycodes, a bunch are broken anyway and many have different
         // behavious (eg. PrintScreen, NumLock, Modifiers etc.)
