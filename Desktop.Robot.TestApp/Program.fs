@@ -16,11 +16,11 @@ type MainWindow() as this =
         this.Title <- "Desktop.Robot test app"
         this.Width <- 300.
         this.Height <- 200.
-        
+
         let btn = Button()
         this.Content <- btn
         btn.Content <- "Click to start test"
-        btn.Width <- 100.
+        btn.Width <- 150.
         btn.Height <- 50.
         let runTests () =
             this.Content <- null
