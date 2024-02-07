@@ -225,7 +225,7 @@ namespace Desktop.Robot
         Dollar,
 
         [Keycode(Platform = "OSX", Keycode = 0x2C)]
-        [Keycode(Platform = "Windows", Keycode = 0x5A)]
+        [Keycode(Platform = "Windows", Keycode = 0xBF)]
         [Keycode(Platform = "Linux", Keycode = 0x002f)]
         Slash,
 
