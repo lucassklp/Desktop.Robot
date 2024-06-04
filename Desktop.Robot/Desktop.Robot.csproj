@@ -1,15 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>1.5.0</Version>
+    <Version>1.5.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Lucas Simas</Authors>
-    <Description>A library used to control your mouse and keyboard programmatically in .NET Core</Description>
+    <Authors>Lucas Simas, Christoph Döllinger</Authors>
+    <Description>A library used to control your mouse and keyboard programmatically in .NET Core
+Updated to .NET 8</Description>
     <PackageProjectUrl>https://lucassklp.github.io/Desktop.Robot/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/lucassklp/Desktop.Robot</RepositoryUrl>
+    <RepositoryUrl>https://github.com/MrDoe/Desktop.Robot</RepositoryUrl>
     <PackageIcon>logo.mini.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageId>$(AssemblyName)_Net8_v</PackageId>
+    <Product>$(AssemblyName)_Net8_v</Product>
   </PropertyGroup>
 
   <ItemGroup>
