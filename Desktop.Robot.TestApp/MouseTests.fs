@@ -115,8 +115,8 @@ let tests (window:Window) = testList "Mouse tests" [
         let robot = Robot();
         robot.AutoDelay <- 100;
         let! deltaEvents = attemptUIActionList wheelDeltas <| async {
-            robot.MouseScroll(100) // scroll down
-            robot.MouseScroll(-100) // then scroll up
+            robot.MouseScroll(1) // scroll down
+            robot.MouseScroll(-1) // then scroll up
         }
         Expect.hasLength deltaEvents 2 "Should have a wheel event for each mouse scroll"
         let xDeltas = deltaEvents |> List.map (fun p -> p.X)
