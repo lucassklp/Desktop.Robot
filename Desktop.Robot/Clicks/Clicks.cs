@@ -24,7 +24,9 @@ namespace Desktop.Robot.Clicks
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                return new OSX.RightClick(delay);
+                return RuntimeInformation.ProcessArchitecture == Architecture.Arm64 
+                    ? new OSX.ARM.RightClick(delay) 
+                    : new OSX.RightClick(delay);
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -44,7 +46,9 @@ namespace Desktop.Robot.Clicks
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                return new OSX.LeftClick(delay);
+                return RuntimeInformation.ProcessArchitecture == Architecture.Arm64 
+                    ? new OSX.ARM.LeftClick(delay) 
+                    : new OSX.LeftClick(delay);
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -64,7 +68,9 @@ namespace Desktop.Robot.Clicks
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                return new OSX.MiddleClick(delay);
+                return RuntimeInformation.ProcessArchitecture == Architecture.Arm64 
+                    ? new OSX.ARM.MiddleClick(delay) 
+                    : new OSX.MiddleClick(delay);
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
