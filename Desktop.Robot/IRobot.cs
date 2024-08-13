@@ -25,5 +25,19 @@ namespace Desktop.Robot
         void MouseScroll(int value, TimeSpan duration);
         void MouseScroll(int value, TimeSpan duration, int steps);
         Point GetMousePosition();
+
+        /// <summary>
+        /// Moves the mouse by a given amount from the current position.
+        /// The <paramref name="x"/> and <paramref name="y"/> values are added to the current coordinates.
+        /// </summary>
+        /// <param name="x">X value added to the current X position.</param>
+        /// <param name="y">Y value added to the current Y position.</param>
+        void MouseMoveRelative(int x, int y)
+        {
+            Point currentPoint = GetMousePosition();
+            currentPoint.X += x;
+            currentPoint.Y += y;
+            MouseMove(currentPoint);
+        }
     }
 }
