@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Desktop.Robot.Windows
 {
@@ -42,13 +43,44 @@ namespace Desktop.Robot.Windows
 
 		public override void KeyPress(char key)
 		{
-			ApplyAutoDelay();
-			var keycode = (byte)VkKeyScan(key);
-			keybd_event(keycode, 0, 0, 0);
-			keybd_event(keycode, 0, 2, 0);
-		}
+            ApplyAutoDelay();
+            short result = VkKeyScan(key);
 
-		public override void KeyUp(Key key)
+            // Get the high order byte of the result to check for Ctrl and Alt keys
+            var highOrderByte = (result >> 8) & 0xFF;
+
+            // Check if the key is uppercase or if AltGr (Ctrl + Alt) is needed
+            if ((highOrderByte & 1) == 1) // Shift
+            {
+                KeyDown(Key.Shift);
+            }
+            if ((highOrderByte & 2) == 2) // Ctrl
+            {
+                KeyDown(Key.Control);
+            }
+            if ((highOrderByte & 4) == 4) // Alt
+            {
+                KeyDown(Key.Alt);
+            }
+
+            keybd_event((byte)result, 0, 0, 0); // key down
+            keybd_event((byte)result, 0, 2, 0); // key up
+
+            if ((highOrderByte & 1) == 1) // Shift
+            {
+                KeyUp(Key.Shift);
+            }
+            if ((highOrderByte & 2) == 2) // Ctrl
+            {
+                KeyUp(Key.Control);
+            }
+            if ((highOrderByte & 4) == 4) // Alt
+            {
+                KeyUp(Key.Alt);
+            }
+        }
+
+        public override void KeyUp(Key key)
 		{
 			ApplyAutoDelay();
 			var metadata = key.GetKeycode();

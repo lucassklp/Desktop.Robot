@@ -44,9 +44,38 @@ namespace Desktop.Robot.Linux
         public override void KeyPress(char key)
         {
             ApplyAutoDelay();
-            var flags = char.IsUpper(key) ? (1 << 0) : 0;
-            pressKey(key, true, flags);
-            pressKey(key, false, flags);
+            // Get the high order byte of the result to check for Ctrl and Alt keys
+            var highOrderByte = char.IsUpper(key) ? (1 << 0) : 0;
+
+            // Check if the key is uppercase or if AltGr (Ctrl + Alt) is needed
+            if ((highOrderByte & 1) == 1) // Shift
+            {
+                KeyDown(Key.Shift);
+            }
+            if ((highOrderByte & 2) == 2) // Ctrl
+            {
+                KeyDown(Key.Control);
+            }
+            if ((highOrderByte & 4) == 4) // Alt
+            {
+                KeyDown(Key.Alt);
+            }
+
+            pressKey(key, true, highOrderByte);
+            pressKey(key, false, highOrderByte);
+
+            if ((highOrderByte & 1) == 1) // Shift
+            {
+                KeyUp(Key.Shift);
+            }
+            if ((highOrderByte & 2) == 2) // Ctrl
+            {
+                KeyUp(Key.Control);
+            }
+            if ((highOrderByte & 4) == 4) // Alt
+            {
+                KeyUp(Key.Alt);
+            }
         }
 
         public override void KeyUp(Key key)
@@ -69,7 +98,6 @@ namespace Desktop.Robot.Linux
             moveMouse(x, y);
         }
 
-
         public override void MouseScroll(int value)
         {
             ApplyAutoDelay();
@@ -84,7 +112,7 @@ namespace Desktop.Robot.Linux
         public override void MouseScroll(int value, TimeSpan duration, int steps)
         {
             ApplyAutoDelay();
-            for (int i = 0; i < steps; i++)
+            for (int i = 0; i < steps; ++i)
             {
                 DoMouseScroll(value / steps, Convert.ToInt32(duration.TotalMilliseconds) / steps);
             }
